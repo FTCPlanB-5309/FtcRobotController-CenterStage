@@ -80,8 +80,10 @@ public class Teleop extends OpMode {
         robot.rightOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.middleOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.leftOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        claws.RightClawOpen();
-//        claws.LeftClawOpen();
+        robot.hookServo.setPosition(robot.HOOK_IN);
+        robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
+        robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
+
 
     }
 
@@ -205,28 +207,40 @@ public class Teleop extends OpMode {
             robot.wristServo.setPosition(WristPosition - robot.WRIST_SERVO_CHANGE_RATE);
         }
 
+        //Pixel Lock Controls
+        //Upwards on gamepad
+        if(gamepad2.left_stick_y < -.5){
+            robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_LOCK);
+            robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_LOCK);
+        }
+        //Downwards on gamepad
+        if (gamepad2.left_stick_y > .5){
+            robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
+            robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
+        }
+
         //AutoLoad Controls
 
         //Preload
         Preload();
         if (preloadState == PreloadStates.NOT_RUNNING &&
-                loadpixelState == LoadPixelStates.NOT_RUNNING) {
-            robot.armMotor.setPower(gamepad2.right_stick_y);
-        }
-        if (gamepad2.x && preloadState == PreloadStates.NOT_RUNNING) {
-            preloadState = PreloadStates.MOVE_SERVOS;
+            loadpixelState == LoadPixelStates.NOT_RUNNING &&
+            gamepad2.x) {
+                preloadState = PreloadStates.MOVE_SERVOS;
         }
 
         //LoadPixel
         LoadPixel();
         if (loadpixelState == LoadPixelStates.NOT_RUNNING &&
-                preloadState == PreloadStates.NOT_RUNNING) {
-            robot.armMotor.setPower(gamepad2.right_stick_y);
-        }
-        if (gamepad2.y && loadpixelState == LoadPixelStates.NOT_RUNNING){
-            loadpixelState = LoadPixelStates.ARM_OUT;
+            preloadState == PreloadStates.NOT_RUNNING &&
+            gamepad2.y) {
+                loadpixelState = LoadPixelStates.ARM_OUT;
         }
 
+        if (loadpixelState == LoadPixelStates.NOT_RUNNING &&
+            preloadState == PreloadStates.NOT_RUNNING){
+                robot.armMotor.setPower(gamepad2.right_stick_y);
+        }
 
             //Intake Controls
             if (gamepad2.a) {
@@ -267,8 +281,9 @@ public class Teleop extends OpMode {
         }
         private void Preload() {
             switch (preloadState) {
+
                 case MOVE_SERVOS:
-                    time_arm_move = System.currentTimeMillis() + 1000;
+                    time_arm_move = System.currentTimeMillis() + 500;
                     robot.wristServo.setPosition(robot.GRAB_WRIST);
                     robot.leftClawServo.setPosition(robot.LEFT_CLAW_OPEN);
                     robot.rightClawServo.setPosition(robot.RIGHT_CLAW_OPEN);
@@ -280,7 +295,7 @@ public class Teleop extends OpMode {
                     if (System.currentTimeMillis() > time_arm_move) {
                         robot.armMotor.setTargetPosition(robot.ARM_READY);
                         robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        robot.armMotor.setPower(-.3);
+                        robot.armMotor.setPower(-.7);
                         preloadState = PreloadStates.WAIT_FOR_ARM;
                     }
                     break;
@@ -301,22 +316,24 @@ public class Teleop extends OpMode {
     private void LoadPixel() {
         switch (loadpixelState) {
             case ARM_OUT:
-                time_arm_move_out = System.currentTimeMillis() + 250;
+                time_arm_move_out = System.currentTimeMillis() + 500;
                 robot.armServo.setPosition(robot.GRAB_ARM);
                 loadpixelState = LoadPixelStates.CLOSE_CLAWS;
                 break;
 
             case CLOSE_CLAWS:
                 if (System.currentTimeMillis() > time_arm_move_out) {
-                    time_close_claws = System.currentTimeMillis() + 500;
-                    robot.leftClawServo.close();
-                    robot.rightClawServo.close();
+                    time_close_claws = System.currentTimeMillis() + 250;
+                    robot.leftClawServo.setPosition(robot.LEFT_CLAW_CLOSE);
+                    robot.rightClawServo.setPosition(robot.RIGHT_CLAW_CLOSE);
                     loadpixelState = LoadPixelStates.MOVE_SERVOS;
                 }
                 break;
 
             case MOVE_SERVOS:
                 if (System.currentTimeMillis() > time_close_claws) {
+                    robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
+                    robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
                     robot.armServo.setPosition(robot.SHORT_ARM);
                     robot.wristServo.setPosition(robot.UPWARDS_WRIST);
                     loadpixelState = LoadPixelStates.MOVE_ARM;
@@ -328,7 +345,7 @@ public class Teleop extends OpMode {
                 if (System.currentTimeMillis() > time_arm_move) {
                     robot.armMotor.setTargetPosition(robot.ARM_UP);
                     robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    robot.armMotor.setPower(.3);
+                    robot.armMotor.setPower(.7);
                     loadpixelState = LoadPixelStates.WAIT_FOR_ARM;
                 }
                 break;
@@ -336,7 +353,7 @@ public class Teleop extends OpMode {
             case WAIT_FOR_ARM:
                 if (robot.armMotor.isBusy() == false) {
                     robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                    preloadState = PreloadStates.NOT_RUNNING;
+                    loadpixelState = loadpixelState.NOT_RUNNING;
                 }
                 break;
 

@@ -84,6 +84,8 @@ public class RobotHardware {
     public Servo rightClawServo = null;
     public Servo armServo = null;
     public Servo hookServo = null;
+    public Servo leftPixelLockServo = null;
+    public Servo rightPixelLockServo = null;
 
     //Create Sensors
     BNO055IMU imu;
@@ -91,20 +93,26 @@ public class RobotHardware {
     public Rev2mDistanceSensor leftDistanceSensor = null;
 
     //Servo Constants
+    //CHANGE THE STUPID VALUES
+    public static final double LEFT_PIXEL_UNLOCK = .75;
+    public static final double LEFT_PIXEL_LOCK = .25;
+    public static final double RIGHT_PIXEL_UNLOCK = .25;
+    public static final double RIGHT_PIXEL_LOCK = .75;
+    //
     public static final double LEFT_CLAW_CLOSE = 0.85;
     public static final double LEFT_CLAW_OPEN = 0.55;
     public static final double RIGHT_CLAW_CLOSE = 0.75;
     public static final double RIGHT_CLAW_OPEN = 0.25;
     public static final double WRIST_SERVO_CHANGE_RATE = .004;
     public static final double ARM_SERVO_CHANGE_RATE = .008;
-    public static final double UPWARDS_WRIST = .8;
+    public static final double UPWARDS_WRIST = .75;
     public static final double RESTING_WRIST = .619;
     public static final double GRAB_WRIST = .49;
     public static final double PLACE_WRIST = .5;
     public static final double HOOK_IN = .75;
     public static final double HOOK_OUT = .4;
     public static final double SHORT_ARM = .89;
-    public static final double GRAB_ARM = .85;
+    public static final double GRAB_ARM = .79;
     public static final int CLICKS_PER_CENTIMETER = 18;
     public static final double ODOMETRY_CLICKS_PER_CENTIMETER = 362.165;
     public static final int STRAFE_CLICKS_PER_CENTIMETER = 20;
@@ -155,6 +163,8 @@ public class RobotHardware {
         rightClawServo = hwMap.get(Servo.class, "rightClawServo");
         armServo = hwMap.get(Servo.class, "armServo");
         hookServo = hwMap.get(Servo.class, "hookServo");
+        rightPixelLockServo = hwMap.get(Servo.class, "rightPixelLockServo");
+        leftPixelLockServo = hwMap.get(Servo.class, "leftPixelLockServo");
 
         leftDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "leftDistanceSensor");
         rightDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "rightDistanceSensor");
