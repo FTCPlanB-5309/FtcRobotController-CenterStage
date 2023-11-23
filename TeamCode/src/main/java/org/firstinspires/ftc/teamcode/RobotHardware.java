@@ -93,12 +93,10 @@ public class RobotHardware {
     public Rev2mDistanceSensor leftDistanceSensor = null;
 
     //Servo Constants
-    //CHANGE THE STUPID VALUES
     public static final double LEFT_PIXEL_UNLOCK = .75;
     public static final double LEFT_PIXEL_LOCK = .25;
     public static final double RIGHT_PIXEL_UNLOCK = .25;
     public static final double RIGHT_PIXEL_LOCK = .75;
-    //
     public static final double LEFT_CLAW_CLOSE = 0.85;
     public static final double LEFT_CLAW_OPEN = 0.55;
     public static final double RIGHT_CLAW_CLOSE = 0.75;
@@ -122,9 +120,33 @@ public class RobotHardware {
     public double rightDistance = 8192;
     public static final double PROP_THRESHOLD = 12;
 
-    //turning speeds
+    //Turning Speeds
     public final double HIGH_TURN_POWER = 0.6;
     public final double LOW_TURN_POWER = 0.07;
+
+    //Odometry Values
+
+
+    //MEASURE STUPID VALUES THEY'RE WRONG RIGHT NOW
+    final static double L = 1;//distance between encoder 1 and 2 in cm
+    final static double B = 1;//distance between the midpoint of encoder 1 and 2 and encoder 3
+    final static double R = 1;//wheel radius in cm
+    final static double N = 8192; //encoder ticks per revolution, REV encoder
+    final static double cm_per_tick = 2.0 * Math.PI * R / N;
+
+    //Keep Track of Odometry Encoders Between Updates
+    public int currentRightPosition = 0;
+    public int currentMiddlePosition = 0;
+    public int currentLeftPosition = 0;
+
+    private int oldRightPosition = 0;
+    private int oldMiddlePosition = 0;
+    private int oldLeftPosition = 0;
+
+    //XyhVector is a tuple (x,y,h) where h is the heading of the robot
+    //We need to write the code for XyhVector
+    public XyhVector START_POS = new XyhVector(91.44, 210.82, Math.toRadians(90));
+    public XyhVector pos = new XyhVector(START_POS);
 
 
     /* local OpMode members. */
@@ -157,6 +179,8 @@ public class RobotHardware {
         leftOdometry = hwMap.get(DcMotor.class, "leftOdometry");
         middleOdometry = hwMap.get(DcMotor.class, "frontLeftMotor");
         rightOdometry = hwMap.get(DcMotor.class, "frontRightMotor");
+
+
 
         wristServo = hwMap.get(Servo.class, "wristServo");
         leftClawServo = hwMap.get(Servo.class, "leftClawServo");
@@ -219,9 +243,39 @@ public class RobotHardware {
         wristServo.setPosition(GRAB_WRIST);
         armServo.setPosition(SHORT_ARM);
         hookServo.setPosition(HOOK_IN);
+    }
+    public void odometry() {
 
-        //Odometry
+        oldRightPosition = currentRightPosition;
+        oldMiddlePosition = currentMiddlePosition;
+        oldLeftPosition = currentLeftPosition;
 
+        currentRightPosition = -frontRightMotor.getCurrentPosition();
+        currentMiddlePosition = frontLeftMotor.getCurrentPosition();
+        currentLeftPosition = -leftOdometry.getCurrentPosition();
 
+        int dn2 = currentRightPosition - oldRightPosition;
+        int dn3 = currentMiddlePosition - oldMiddlePosition;
+        int dn1 = currentLeftPosition - oldLeftPosition;
+
+        //The robot has moved and turned a tiny bit between the two measurements
+        double dtheta = cm_per_tick * (dn2-dn1) / L;
+        double dx = cm_per_tick * (dn1+dn2) / 2.0;
+        double dy = cm_per_tick * (dn3 - (dn2-dn1) * B / L);
+
+        //Small movement of the robot gets added to the filed coordinate system
+        double theta = pos.h + (dtheta / 2.0);
+        pos.x += dx * Math.cos(theta) - dy * Math.sin(theta);
+        pos.y += dx * Math.sin(theta) + dy * Math.cos(theta);
+        pos.h += dtheta;
+
+        //Limit theta to +/- PI or +/- 180 degrees
+        pos.h = pos.h % (2.0 * Math.PI);
+        if (pos.h > Math.PI){
+            pos.h -= 2.0 * Math.PI;
+        }
+        if (pos.h < -Math.PI ){
+            pos.h += 2.0 * Math.PI;
+        }
     }
 }

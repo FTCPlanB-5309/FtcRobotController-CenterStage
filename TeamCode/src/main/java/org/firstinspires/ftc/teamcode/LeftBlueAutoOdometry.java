@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
     public class LeftBlueAutoOdometry extends LinearOpMode{
     RobotHardware robot       = new RobotHardware();
+    XyhVector pos = new XyhVector(91.44, 210.82, 90);
     /*
      * Code to run ONCE when the driver hits INIT
      */
