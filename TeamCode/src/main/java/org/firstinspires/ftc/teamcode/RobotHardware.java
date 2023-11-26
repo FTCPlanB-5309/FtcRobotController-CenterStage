@@ -110,7 +110,7 @@ public class RobotHardware {
     public static final double HOOK_IN = .75;
     public static final double HOOK_OUT = .4;
     public static final double SHORT_ARM = .89;
-    public static final double GRAB_ARM = .79;
+    public static final double GRAB_ARM = .76;
     public static final int CLICKS_PER_CENTIMETER = 18;
     public static final double ODOMETRY_CLICKS_PER_CENTIMETER = 362.165;
     public static final int STRAFE_CLICKS_PER_CENTIMETER = 20;
