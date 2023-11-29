@@ -71,7 +71,7 @@ public class RobotHardware {
 
     // Motor Constants
     public static final int ARM_READY = -2321;
-    public static final int ARM_UP = -509;
+    public static final int ARM_UP = -1000;
 
     //Create Odometry Motors
     public DcMotor leftOdometry = null;
@@ -94,8 +94,8 @@ public class RobotHardware {
 
     //Servo Constants
     public static final double LEFT_PIXEL_UNLOCK = .75;
-    public static final double LEFT_PIXEL_LOCK = .25;
-    public static final double RIGHT_PIXEL_UNLOCK = .25;
+    public static final double LEFT_PIXEL_LOCK = .35;
+    public static final double RIGHT_PIXEL_UNLOCK = .35;
     public static final double RIGHT_PIXEL_LOCK = .75;
     public static final double LEFT_CLAW_CLOSE = 0.85;
     public static final double LEFT_CLAW_OPEN = 0.55;

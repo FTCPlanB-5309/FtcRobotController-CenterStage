@@ -244,9 +244,9 @@ public class Teleop extends OpMode {
 
             //Intake Controls
             if (gamepad2.a) {
-                robot.intakeMotor.setPower(-1);
-            } else if (gamepad2.b) {
                 robot.intakeMotor.setPower(1);
+            } else if (gamepad2.b) {
+                robot.intakeMotor.setPower(-1);
             } else {
                 robot.intakeMotor.setPower(0);
             }
