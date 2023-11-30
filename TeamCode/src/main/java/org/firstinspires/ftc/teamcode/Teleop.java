@@ -353,6 +353,7 @@ public class Teleop extends OpMode {
             case WAIT_FOR_ARM:
                 if (robot.armMotor.isBusy() == false) {
                     robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                    WristPosition = robot.wristServo.getPosition();
                     loadpixelState = loadpixelState.NOT_RUNNING;
                 }
                 break;

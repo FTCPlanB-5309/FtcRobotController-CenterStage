@@ -71,7 +71,7 @@ public class RobotHardware {
 
     // Motor Constants
     public static final int ARM_READY = -2321;
-    public static final int ARM_UP = -509;
+    public static final int ARM_UP = -1309;
 
     //Create Odometry Motors
     public DcMotor leftOdometry = null;
@@ -128,9 +128,9 @@ public class RobotHardware {
 
 
     //MEASURE STUPID VALUES THEY'RE WRONG RIGHT NOW
-    final static double L = 1;//distance between encoder 1 and 2 in cm
-    final static double B = 1;//distance between the midpoint of encoder 1 and 2 and encoder 3
-    final static double R = 1;//wheel radius in cm
+    final static double L = 17.531;//distance between encoder 1 and 2 in cm
+    final static double B = 35.062;//distance between the midpoint of encoder 1 and 2 and encoder 3
+    final static double R = 3.6;//wheel radius in cm
     final static double N = 8192; //encoder ticks per revolution, REV encoder
     final static double cm_per_tick = 2.0 * Math.PI * R / N;
 
@@ -216,8 +216,11 @@ public class RobotHardware {
         intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         droneMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         middleOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        middleOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -244,7 +247,7 @@ public class RobotHardware {
         armServo.setPosition(SHORT_ARM);
         hookServo.setPosition(HOOK_IN);
     }
-    public void odometry() {
+    public void odometry(){
 
         oldRightPosition = currentRightPosition;
         oldMiddlePosition = currentMiddlePosition;
