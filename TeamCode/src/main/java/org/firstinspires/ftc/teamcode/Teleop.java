@@ -295,7 +295,7 @@ public class Teleop extends OpMode {
                     if (System.currentTimeMillis() > time_arm_move) {
                         robot.armMotor.setTargetPosition(robot.ARM_READY);
                         robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        robot.armMotor.setPower(-.7);
+                        robot.armMotor.setPower(-1);
                         preloadState = PreloadStates.WAIT_FOR_ARM;
                     }
                     break;
