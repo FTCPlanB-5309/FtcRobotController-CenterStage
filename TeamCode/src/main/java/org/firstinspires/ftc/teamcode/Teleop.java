@@ -74,13 +74,15 @@ public class Teleop extends OpMode {
         robot.init(hardwareMap);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.rightOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.middleOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.leftOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.middleOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.leftOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        robot.rightOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.middleOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.leftOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.rightOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        robot.middleOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        robot.leftOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.hookServo.setPosition(robot.HOOK_IN);
+        robot.leftClawServo.setPosition(robot.LEFT_CLAW_CLOSE);
+        robot.rightClawServo.setPosition(robot.RIGHT_CLAW_CLOSE);
         robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
         robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
 
@@ -243,9 +245,9 @@ public class Teleop extends OpMode {
         }
 
             //Intake Controls
-            if (gamepad2.a) {
+            if (gamepad2.b) {
                 robot.intakeMotor.setPower(-1);
-            } else if (gamepad2.b) {
+            } else if (gamepad2.a) {
                 robot.intakeMotor.setPower(1);
             } else {
                 robot.intakeMotor.setPower(0);
@@ -262,9 +264,9 @@ public class Teleop extends OpMode {
             }
 
             //Telemetry Data
-            telemetry.addData("LeftOdometryWheel", robot.leftOdometry.getCurrentPosition());
-            telemetry.addData("MiddleOdometryWheel", robot.middleOdometry.getCurrentPosition());
-            telemetry.addData("RightOdometryWheel", robot.rightOdometry.getCurrentPosition());
+//            telemetry.addData("LeftOdometryWheel", robot.leftOdometry.getCurrentPosition());
+//            telemetry.addData("MiddleOdometryWheel", robot.middleOdometry.getCurrentPosition());
+//            telemetry.addData("RightOdometryWheel", robot.rightOdometry.getCurrentPosition());
             telemetry.addData("Wrist Value: ", robot.wristServo.getPosition());
             telemetry.addData("Arm (Up/Down) Value: ", robot.armMotor.getCurrentPosition());
             telemetry.addData("State of preload", preloadState);

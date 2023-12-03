@@ -70,13 +70,14 @@ public class RobotHardware {
     public DcMotor droneMotor = null;
 
     // Motor Constants
+    public static final int ARM_PIXEL_DROP = -500;
     public static final int ARM_READY = -2321;
     public static final int ARM_UP = -1309;
 
     //Create Odometry Motors
-    public DcMotor leftOdometry = null;
-    public DcMotor middleOdometry = null;
-    public DcMotor rightOdometry = null;
+//    public DcMotor leftOdometry = null;
+//    public DcMotor middleOdometry = null;
+//    public DcMotor rightOdometry = null;
 
     //Create Servos
     public Servo wristServo = null;
@@ -110,7 +111,7 @@ public class RobotHardware {
     public static final double HOOK_IN = .75;
     public static final double HOOK_OUT = .4;
     public static final double SHORT_ARM = .89;
-    public static final double GRAB_ARM = .72;
+    public static final double GRAB_ARM = .75;
     public static final double LONG_ARM = .1;
     public static final int CLICKS_PER_CENTIMETER = 18;
     public static final double ODOMETRY_CLICKS_PER_CENTIMETER = 362.165;
@@ -126,9 +127,6 @@ public class RobotHardware {
     public final double LOW_TURN_POWER = 0.07;
 
     //Odometry Values
-
-
-    //MEASURE STUPID VALUES THEY'RE WRONG RIGHT NOW
     final static double L = 17.531;//distance between encoder 1 and 2 in cm
     final static double B = 35.062;//distance between the midpoint of encoder 1 and 2 and encoder 3
     final static double R = 3.6;//wheel radius in cm
@@ -146,8 +144,8 @@ public class RobotHardware {
 
     //XyhVector is a tuple (x,y,h) where h is the heading of the robot
     //We need to write the code for XyhVector
-    public XyhVector START_POS = new XyhVector(91.44, 210.82, Math.toRadians(90));
-    public XyhVector pos = new XyhVector(START_POS);
+//    public XyhVector START_POS = new XyhVector(91.44, 210.82, Math.toRadians(90));
+//    public XyhVector pos = new XyhVector(START_POS);
 
 
     /* local OpMode members. */
@@ -177,9 +175,9 @@ public class RobotHardware {
         droneMotor = hwMap.get(DcMotor.class, "droneMotor");
 
         // Odometry
-        leftOdometry = hwMap.get(DcMotor.class, "leftOdometry");
-        middleOdometry = hwMap.get(DcMotor.class, "frontLeftMotor");
-        rightOdometry = hwMap.get(DcMotor.class, "frontRightMotor");
+//        leftOdometry = hwMap.get(DcMotor.class, "leftOdometry");
+//        middleOdometry = hwMap.get(DcMotor.class, "frontLeftMotor");
+//        rightOdometry = hwMap.get(DcMotor.class, "frontRightMotor");
 
 
 
@@ -206,22 +204,27 @@ public class RobotHardware {
         droneMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Odometry
-        leftOdometry.setDirection(DcMotorSimple.Direction.REVERSE);
+//        leftOdometry.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Using Encoders
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         droneMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rightOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        middleOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        middleOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leftOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        rightOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        rightOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        middleOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        middleOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        leftOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        leftOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
         armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -248,38 +251,38 @@ public class RobotHardware {
         armServo.setPosition(SHORT_ARM);
         hookServo.setPosition(HOOK_IN);
     }
-    public void odometry(){
-
-        oldRightPosition = currentRightPosition;
-        oldMiddlePosition = currentMiddlePosition;
-        oldLeftPosition = currentLeftPosition;
-
-        currentRightPosition = -frontRightMotor.getCurrentPosition();
-        currentMiddlePosition = frontLeftMotor.getCurrentPosition();
-        currentLeftPosition = -leftOdometry.getCurrentPosition();
-
-        int dn2 = currentRightPosition - oldRightPosition;
-        int dn3 = currentMiddlePosition - oldMiddlePosition;
-        int dn1 = currentLeftPosition - oldLeftPosition;
-
-        //The robot has moved and turned a tiny bit between the two measurements
-        double dtheta = cm_per_tick * (dn2-dn1) / L;
-        double dx = cm_per_tick * (dn1+dn2) / 2.0;
-        double dy = cm_per_tick * (dn3 - (dn2-dn1) * B / L);
-
-        //Small movement of the robot gets added to the filed coordinate system
-        double theta = pos.h + (dtheta / 2.0);
-        pos.x += dx * Math.cos(theta) - dy * Math.sin(theta);
-        pos.y += dx * Math.sin(theta) + dy * Math.cos(theta);
-        pos.h += dtheta;
-
-        //Limit theta to +/- PI or +/- 180 degrees
-        pos.h = pos.h % (2.0 * Math.PI);
-        if (pos.h > Math.PI){
-            pos.h -= 2.0 * Math.PI;
-        }
-        if (pos.h < -Math.PI ){
-            pos.h += 2.0 * Math.PI;
-        }
-    }
+//    public void odometry(){
+//
+//        oldRightPosition = currentRightPosition;
+//        oldMiddlePosition = currentMiddlePosition;
+//        oldLeftPosition = currentLeftPosition;
+//
+//        currentRightPosition = -frontRightMotor.getCurrentPosition();
+//        currentMiddlePosition = frontLeftMotor.getCurrentPosition();
+//        currentLeftPosition = -leftOdometry.getCurrentPosition();
+//
+//        int dn2 = currentRightPosition - oldRightPosition;
+//        int dn3 = currentMiddlePosition - oldMiddlePosition;
+//        int dn1 = currentLeftPosition - oldLeftPosition;
+//
+//        //The robot has moved and turned a tiny bit between the two measurements
+//        double dtheta = cm_per_tick * (dn2-dn1) / L;
+//        double dx = cm_per_tick * (dn1+dn2) / 2.0;
+//        double dy = cm_per_tick * (dn3 - (dn2-dn1) * B / L);
+//
+//        //Small movement of the robot gets added to the filed coordinate system
+//        double theta = pos.h + (dtheta / 2.0);
+//        pos.x += dx * Math.cos(theta) - dy * Math.sin(theta);
+//        pos.y += dx * Math.sin(theta) + dy * Math.cos(theta);
+//        pos.h += dtheta;
+//
+//        //Limit theta to +/- PI or +/- 180 degrees
+//        pos.h = pos.h % (2.0 * Math.PI);
+//        if (pos.h > Math.PI){
+//            pos.h -= 2.0 * Math.PI;
+//        }
+//        if (pos.h < -Math.PI ){
+//            pos.h += 2.0 * Math.PI;
+//        }
+//    }
 }
