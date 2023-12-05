@@ -26,26 +26,31 @@ public class LeftBlueAuto extends LinearOpMode {
         robot.armMotor.setTargetPosition(ARM_PIXEL_DROP);
         robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.armMotor.setPower(-1);
+        robot.wristServo.setPosition(robot.RESTING_WRIST);
         drive.forward(77, .25);
         double leftDistance = readSensor.distance(robot.leftDistanceSensor);
         double rightDistance = readSensor.distance(robot.rightDistanceSensor);
         telemetry.addData("leftDistance: ",leftDistance);
         telemetry.addData("rightDistance: ",rightDistance);
         telemetry.update();
+
         if(leftDistance < robot.PROP_THRESHOLD){
-        drive.backward(10,.2);
-        strafe.left(21,.2);
-        claws.LeftClawOpen();
-        drive.backward(10,.2);
-        strafe.left(71,.4);
+            drive.backward(20,.2);
+            strafe.left(21,.2);
+            claws.LeftClawOpen();
+            strafe.left(71,.4);
+            drive.backward(40,.2);
         }
         else if(rightDistance < robot.PROP_THRESHOLD){
             drive.backward(10,.2);
-            gyroTurn.goodEnough(-90);
+            gyroTurn.goodEnough(-450);
+            Thread.sleep(5000);
             drive.forward(10,.2);
             claws.LeftClawOpen();
-            Thread.sleep(1000);
-            drive.backward(92,.4);
+            robot.armServo.setPosition(robot.SHORT_ARM);
+            gyroTurn.goodEnough(45);
+            drive.backward(140,.2);
+            strafe.right(40,.2);
         }
         else{
             drive.backward(10, .4);
@@ -53,7 +58,9 @@ public class LeftBlueAuto extends LinearOpMode {
             Thread.sleep(1000);
             drive.backward(20,.2);
             strafe.left(92,.4);
+            drive.backward(40,.2);
         }
+        robot.armServo.setPosition(robot.SHORT_ARM);
         Thread.sleep(30000);
 
 

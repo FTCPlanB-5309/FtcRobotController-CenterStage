@@ -70,7 +70,7 @@ public class RobotHardware {
     public DcMotor droneMotor = null;
 
     // Motor Constants
-    public static final int ARM_PIXEL_DROP = -500;
+    public static final int ARM_PIXEL_DROP = -300;
     public static final int ARM_READY = -2321;
     public static final int ARM_UP = -1309;
 
@@ -103,7 +103,7 @@ public class RobotHardware {
     public static final double RIGHT_CLAW_CLOSE = 0.75;
     public static final double RIGHT_CLAW_OPEN = 0.25;
     public static final double WRIST_SERVO_CHANGE_RATE = .004;
-    public static final double ARM_SERVO_CHANGE_RATE = .008;
+    public static final double ARM_SERVO_CHANGE_RATE = .005;
     public static final double UPWARDS_WRIST = .75;
     public static final double RESTING_WRIST = .619;
     public static final double GRAB_WRIST = .49;

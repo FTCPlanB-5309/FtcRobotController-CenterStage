@@ -221,6 +221,14 @@ public class Teleop extends OpMode {
             robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
         }
 
+        //Panic Button
+        if(gamepad2.left_stick_button){
+            loadpixelState = LoadPixelStates.NOT_RUNNING;
+            preloadState = PreloadStates.NOT_RUNNING;
+            robot.armMotor.setPower(0);
+            robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+
         //AutoLoad Controls
 
         //Preload
@@ -328,14 +336,14 @@ public class Teleop extends OpMode {
                     time_close_claws = System.currentTimeMillis() + 250;
                     robot.leftClawServo.setPosition(robot.LEFT_CLAW_CLOSE);
                     robot.rightClawServo.setPosition(robot.RIGHT_CLAW_CLOSE);
+                    robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
+                    robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
                     loadpixelState = LoadPixelStates.MOVE_SERVOS;
                 }
                 break;
 
             case MOVE_SERVOS:
                 if (System.currentTimeMillis() > time_close_claws) {
-                    robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
-                    robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
                     robot.armServo.setPosition(robot.SHORT_ARM);
                     robot.wristServo.setPosition(robot.UPWARDS_WRIST);
                     loadpixelState = LoadPixelStates.MOVE_ARM;
