@@ -37,8 +37,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import java.text.BreakIterator;
-
 /**
  * This file works in conjunction with the External Hardware Class sample called: ConceptExternalHardwareClass.java
  * Please read the explanations in that Sample about how to use this class definition.
@@ -70,9 +68,10 @@ public class RobotHardware {
     public DcMotor droneMotor = null;
 
     // Motor Constants
-    public static final int ARM_PIXEL_DROP = -300;
+    public static final int ARM_PIXEL_DROP = -530;
     public static final int ARM_READY = -2321;
     public static final int ARM_UP = -1309;
+    public static final int ARM_PIXEL_SCORE = 6908;
 
     //Create Odometry Motors
 //    public DcMotor leftOdometry = null;
@@ -94,25 +93,32 @@ public class RobotHardware {
     public Rev2mDistanceSensor leftDistanceSensor = null;
 
     //Servo Constants
+    //Pixel Locks
     public static final double LEFT_PIXEL_UNLOCK = .75;
     public static final double LEFT_PIXEL_LOCK = .25;
     public static final double RIGHT_PIXEL_UNLOCK = .25;
     public static final double RIGHT_PIXEL_LOCK = .75;
+    //Claws
     public static final double LEFT_CLAW_CLOSE = 0.85;
     public static final double LEFT_CLAW_OPEN = 0.55;
     public static final double RIGHT_CLAW_CLOSE = 0.75;
     public static final double RIGHT_CLAW_OPEN = 0.25;
-    public static final double WRIST_SERVO_CHANGE_RATE = .004;
-    public static final double ARM_SERVO_CHANGE_RATE = .005;
+    //Wrist
     public static final double UPWARDS_WRIST = .75;
     public static final double RESTING_WRIST = .619;
     public static final double GRAB_WRIST = .49;
-    public static final double PLACE_WRIST = .5;
+    public static final double WRIST_DROP_PIXEL = .33;
+    public static final double WRIST_SCORE_PIXEL = .73;
+    //Hook
     public static final double HOOK_IN = .75;
     public static final double HOOK_OUT = .4;
+    //Arm
     public static final double SHORT_ARM = .89;
     public static final double GRAB_ARM = .75;
     public static final double LONG_ARM = .1;
+    //Rates
+    public static final double WRIST_SERVO_CHANGE_RATE = .004;
+    public static final double ARM_SERVO_CHANGE_RATE = .003;
     public static final int CLICKS_PER_CENTIMETER = 18;
     public static final double ODOMETRY_CLICKS_PER_CENTIMETER = 362.165;
     public static final int STRAFE_CLICKS_PER_CENTIMETER = 20;
@@ -211,6 +217,7 @@ public class RobotHardware {
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
