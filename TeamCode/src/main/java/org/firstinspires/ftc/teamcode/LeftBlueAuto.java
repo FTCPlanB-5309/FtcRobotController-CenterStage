@@ -50,7 +50,7 @@ public class LeftBlueAuto extends LinearOpMode {
             Thread.sleep(100);
             drive.forward(10, .2);
             robot.wristServo.setPosition(robot.GRAB_WRIST);
-            robot.armMotor.setTargetPosition(robot.ARM_READY);
+            robot.armMotor.setTargetPosition(0);
             strafe.right(55, .2);
 
 
@@ -72,7 +72,7 @@ public class LeftBlueAuto extends LinearOpMode {
             claws.RightClawOpen();
             drive.forward(5, .2);
             robot.wristServo.setPosition(robot.GRAB_WRIST);
-            robot.armMotor.setTargetPosition(robot.ARM_READY);
+            robot.armMotor.setTargetPosition(0);
             strafe.left(55, .2);
         }
 
@@ -91,7 +91,7 @@ public class LeftBlueAuto extends LinearOpMode {
             Thread.sleep(100);
             drive.forward(10, .2);
             robot.wristServo.setPosition(robot.GRAB_WRIST);
-            robot.armMotor.setTargetPosition(robot.ARM_READY);
+            robot.armMotor.setTargetPosition(0);
             strafe.right(60, .2);
 
         }
