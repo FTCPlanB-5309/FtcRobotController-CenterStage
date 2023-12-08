@@ -114,7 +114,7 @@ public class RobotHardware {
     public static final double HOOK_OUT = .4;
     //Arm
     public static final double SHORT_ARM = .89;
-    public static final double GRAB_ARM = .75;
+    public static final double GRAB_ARM = .79;
     public static final double LONG_ARM = .1;
     //Rates
     public static final double WRIST_SERVO_CHANGE_RATE = .004;
@@ -254,7 +254,6 @@ public class RobotHardware {
         //Initalize Servos
         rightClawServo.setPosition(RIGHT_CLAW_CLOSE);
         leftClawServo.setPosition(LEFT_CLAW_CLOSE);
-        wristServo.setPosition(GRAB_WRIST);
         armServo.setPosition(SHORT_ARM);
         hookServo.setPosition(HOOK_IN);
     }
