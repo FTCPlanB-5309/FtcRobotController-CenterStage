@@ -57,6 +57,7 @@ public class Teleop extends OpMode {
     long time_arm_move;
     long time_close_claws;
     long time_arm_move_out;
+    long time_claws_grab_confident;
     boolean grabbing = false;
     boolean slow_mode;
     Claws claws;
@@ -229,6 +230,15 @@ public class Teleop extends OpMode {
             robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
 
+        //Stack Servo Kick
+        if(gamepad1.left_trigger > 0.7)
+            robot.stackServo.setPosition(robot.STACK_KICK);
+
+        //Stack Servo Reset
+        if(gamepad1.left_bumper)
+            robot.stackServo.setPosition(robot.STACK_RESET);
+
+
         //AutoLoad Controls
 
         //Preload
@@ -277,6 +287,7 @@ public class Teleop extends OpMode {
 //            telemetry.addData("RightOdometryWheel", robot.rightOdometry.getCurrentPosition());
             telemetry.addData("Wrist Value: ", robot.wristServo.getPosition());
             telemetry.addData("Arm (Up/Down) Value: ", robot.armMotor.getCurrentPosition());
+            telemetry.addData("Arm (In/Out) Value", robot.armServo.getPosition());
             telemetry.addData("State of preload", preloadState);
             telemetry.addData("State of LoadPixel", loadpixelState);
             telemetry.addData("Say", "Happy Little Pixels");
@@ -336,6 +347,13 @@ public class Teleop extends OpMode {
                     time_close_claws = System.currentTimeMillis() + 250;
                     robot.leftClawServo.setPosition(robot.LEFT_CLAW_CLOSE);
                     robot.rightClawServo.setPosition(robot.RIGHT_CLAW_CLOSE);
+                    loadpixelState = LoadPixelStates.UNLOCK_PIXEL_SERVOS;
+                }
+                break;
+
+            case UNLOCK_PIXEL_SERVOS:
+                if (System.currentTimeMillis() > time_close_claws){
+                    time_claws_grab_confident = System.currentTimeMillis() + 500;
                     robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
                     robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
                     loadpixelState = LoadPixelStates.MOVE_SERVOS;
@@ -343,7 +361,7 @@ public class Teleop extends OpMode {
                 break;
 
             case MOVE_SERVOS:
-                if (System.currentTimeMillis() > time_close_claws) {
+                if (System.currentTimeMillis() > time_claws_grab_confident) {
                     robot.armServo.setPosition(robot.SHORT_ARM);
                     robot.wristServo.setPosition(robot.UPWARDS_WRIST);
                     loadpixelState = LoadPixelStates.MOVE_ARM;

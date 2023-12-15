@@ -69,7 +69,7 @@ public class RobotHardware {
 
     // Motor Constants
     public static final int ARM_PIXEL_DROP = -530;
-    public static final int ARM_READY = -2321;
+    public static final int ARM_READY = -2271;
     public static final int ARM_UP = -1309;
     public static final int ARM_PIXEL_SCORE = 6908;
 
@@ -86,6 +86,8 @@ public class RobotHardware {
     public Servo hookServo = null;
     public Servo leftPixelLockServo = null;
     public Servo rightPixelLockServo = null;
+    public Servo stackServo = null;
+
 
     //Create Sensors
     BNO055IMU imu;
@@ -109,13 +111,17 @@ public class RobotHardware {
     public static final double GRAB_WRIST = .49;
     public static final double WRIST_DROP_PIXEL = .33;
     public static final double WRIST_SCORE_PIXEL = .73;
+    //Stack
+    public static final double STACK_KICK = .3;
+    public static final double STACK_RESET = .7;
     //Hook
     public static final double HOOK_IN = .75;
     public static final double HOOK_OUT = .4;
     //Arm
     public static final double SHORT_ARM = .89;
-    public static final double GRAB_ARM = .79;
+    public static final double GRAB_ARM = .81;
     public static final double LONG_ARM = .1;
+
     //Rates
     public static final double WRIST_SERVO_CHANGE_RATE = .004;
     public static final double ARM_SERVO_CHANGE_RATE = .003;
@@ -194,6 +200,8 @@ public class RobotHardware {
         hookServo = hwMap.get(Servo.class, "hookServo");
         rightPixelLockServo = hwMap.get(Servo.class, "rightPixelLockServo");
         leftPixelLockServo = hwMap.get(Servo.class, "leftPixelLockServo");
+        stackServo = hwMap.get(Servo.class,"stackServo");
+
 
         leftDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "leftDistanceSensor");
         rightDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "rightDistanceSensor");

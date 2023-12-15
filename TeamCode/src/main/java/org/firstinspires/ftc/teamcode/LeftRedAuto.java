@@ -69,7 +69,6 @@ public class LeftRedAuto extends LinearOpMode {
             Thread.sleep(300);
             drive.backward(10, .2);
             robot.armMotor.setTargetPosition(0);
-
         }
 
         robot.armServo.setPosition(robot.SHORT_ARM);

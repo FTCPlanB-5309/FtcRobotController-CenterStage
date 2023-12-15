@@ -6,5 +6,5 @@ public enum LoadPixelStates {
     MOVE_SERVOS,
     MOVE_ARM,
     WAIT_FOR_ARM,
-    NOT_RUNNING
+    UNLOCK_PIXEL_SERVOS, NOT_RUNNING
 }
