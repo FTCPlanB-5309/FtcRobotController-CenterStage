@@ -68,6 +68,9 @@ public class RobotHardware {
     public DcMotor droneMotor = null;
 
     // Motor Constants
+    //Actual number needs to be found
+    public static final int ARM_PIXEL_SCORE_TWO = 7100;
+    public static final int ARM_RESET = 0;
     public static final int ARM_PIXEL_DROP = -530;
     public static final int ARM_READY = -2271;
     public static final int ARM_UP = -1309;

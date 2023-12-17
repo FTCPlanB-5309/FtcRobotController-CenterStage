@@ -98,6 +98,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
                 strafe.left(60, .2);
             }
 
+            robot.armMotor.setTargetPosition(robot.ARM_RESET);
             drive.backward(10,.2);
             robot.armServo.setPosition(robot.SHORT_ARM);
             Thread.sleep(30000);

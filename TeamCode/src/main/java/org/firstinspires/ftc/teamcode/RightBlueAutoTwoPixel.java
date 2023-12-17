@@ -9,14 +9,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.vision.VisionPortal;
-import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
-import java.util.List;
+@Autonomous(name = "RightBlueAutoTwoPixel")
 
-@Autonomous(name = "LeftRedAutoTwoPixel")
-
-public class LeftRedAutoTwoPixel extends LinearOpMode {
+public class RightBlueAutoTwoPixel extends LinearOpMode {
     RobotHardware robot = new RobotHardware();
     Drive drive = new Drive(robot, telemetry, this);
     Strafe strafe = new Strafe(robot, telemetry, this);
@@ -27,7 +24,6 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
     private AprilTagProcessor aprilTag;
     private VisionPortal visionPortal;
     PropLocation propLocation;
-
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -48,7 +44,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
         telemetry.addData("rightDistance: ", rightDistance);
         telemetry.update();
 
-        //left not completed
+        //left - not completed
         if (leftDistance < robot.PROP_THRESHOLD) {
             propLocation = PropLocation.LEFT;
             strafe.left(15, .2);
@@ -76,19 +72,19 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
             robot.armMotor.setTargetPosition(0);
         }
 
-        //middle ROBOT IS STARTING BACKWARDS
+        //middle ROBOT IS STARTING BACKWARDS not completed
         else {
             propLocation = PropLocation.CENTER;
             drive.backward(34,.2);
             claws.LeftClawOpen();
             Thread.sleep(300);
             drive.backward(10, .2);
-            gyroTurn.goodEnough(-90);
+            gyroTurn.goodEnough(90);
             drive.backward(180,.3);
             robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
             robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
             robot.armServo.setPosition(robot.SHORT_ARM);
-            strafe.left(67,.2);
+            strafe.right(67,.2);
         }
 
         robot.armMotor.setTargetPosition(robot.ARM_RESET);
@@ -160,30 +156,5 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
         // Disable or re-enable the aprilTag processor at any time.
         //visionPortal.setProcessorEnabled(aprilTag, true);
 
-    }
-
-    private void telemetryAprilTag() {
-
-        List<AprilTagDetection> currentDetections = aprilTag.getDetections();
-        telemetry.addData("# AprilTags Detected", currentDetections.size());
-
-        // Step through the list of detections and display info for each one.
-        for (AprilTagDetection detection : currentDetections) {
-            if (detection.metadata != null) {
-                telemetry.addLine(String.format("\n==== (ID %d) %s", detection.id, detection.metadata.name));
-                telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (inch)", detection.ftcPose.x, detection.ftcPose.y, detection.ftcPose.z));
-                telemetry.addLine(String.format("PRY %6.1f %6.1f %6.1f  (deg)", detection.ftcPose.pitch, detection.ftcPose.roll, detection.ftcPose.yaw));
-                telemetry.addLine(String.format("RBE %6.1f %6.1f %6.1f  (inch, deg, deg)", detection.ftcPose.range, detection.ftcPose.bearing, detection.ftcPose.elevation));
-            } else {
-                telemetry.addLine(String.format("\n==== (ID %d) Unknown", detection.id));
-                telemetry.addLine(String.format("Center %6.0f %6.0f   (pixels)", detection.center.x, detection.center.y));
-            }
-        }   // end for() loop
-
-        // Add "key" information to telemetry
-        telemetry.addLine("\nkey:\nXYZ = X (Right), Y (Forward), Z (Up) dist.");
-        telemetry.addLine("PRY = Pitch, Roll & Yaw (XYZ Rotation)");
-        telemetry.addLine("RBE = Range, Bearing & Elevation");
-
-    }
+    }   // end method initAprilTag()
 }
