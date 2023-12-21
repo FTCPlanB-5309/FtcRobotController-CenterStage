@@ -96,6 +96,7 @@ public class RobotHardware {
     BNO055IMU imu;
     public Rev2mDistanceSensor rightDistanceSensor = null;
     public Rev2mDistanceSensor leftDistanceSensor = null;
+    public Rev2mDistanceSensor rearDistanceSensor = null;
 
     //Servo Constants
     //Pixel Locks
@@ -118,11 +119,11 @@ public class RobotHardware {
     public static final double STACK_KICK = .3;
     public static final double STACK_RESET = .7;
     //Hook
-    public static final double HOOK_IN = .75;
+    public static final double HOOK_IN = .77;
     public static final double HOOK_OUT = .4;
     //Arm
-    public static final double SHORT_ARM = .89;
-    public static final double GRAB_ARM = .81;
+    public static final double SHORT_ARM = .75;
+    public static final double GRAB_ARM = .66;
     public static final double LONG_ARM = .1;
 
     //Rates
@@ -136,6 +137,15 @@ public class RobotHardware {
     public double leftDistance = 8192;
     public double rightDistance = 8192;
     public static final double PROP_THRESHOLD = 12;
+    //DISTANCES NEED TO BE FOUND
+    public static final double blueLeftDistance = 1000;
+    public static final double blueCenterDistance = 1000;
+    public static final double blueRightDistance = 1000;
+    public static final double redLeftDistance = 1000;
+    public static final double redCenterDistance = 1000;
+    public static final double redRightDistance = 1000;
+    public static final double boardDistance = 1000;
+
 
     //Turning Speeds
     public final double HIGH_TURN_POWER = 0.6;
@@ -208,6 +218,7 @@ public class RobotHardware {
 
         leftDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "leftDistanceSensor");
         rightDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "rightDistanceSensor");
+        rearDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "rearDistanceSensor");
 
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
