@@ -292,6 +292,9 @@ public class Teleop extends OpMode {
             telemetry.addData("State of preload", preloadState);
             telemetry.addData("State of LoadPixel", loadpixelState);
             telemetry.addData("Say", "Happy Little Pixels");
+//            telemetry.addData("Left Distance Sensor",robot.leftDistanceSensor.getDistance(DistanceUnit.CM));
+//            telemetry.addData("Right Distance Sensor",robot.rightDistanceSensor.getDistance(DistanceUnit.CM));
+//            telemetry.addData("Rear Distance Sensor",robot.rearDistanceSensor.getDistance(DistanceUnit.CM));
             telemetry.update();
 
 

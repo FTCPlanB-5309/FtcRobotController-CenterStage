@@ -74,7 +74,7 @@ public class RobotHardware {
     public static final int ARM_PIXEL_DROP = -530;
     public static final int ARM_READY = -2271;
     public static final int ARM_UP = -1309;
-    public static final int ARM_PIXEL_SCORE = 6908;
+    public static final int ARM_PIXEL_SCORE = 6000;
 
     //Create Odometry Motors
 //    public DcMotor leftOdometry = null;
@@ -115,6 +115,7 @@ public class RobotHardware {
     public static final double GRAB_WRIST = .49;
     public static final double WRIST_DROP_PIXEL = .33;
     public static final double WRIST_SCORE_PIXEL = .73;
+    public static final double WRIST_SCORE_TWO_PIXEL = .83;
     //Stack
     public static final double STACK_KICK = .3;
     public static final double STACK_RESET = .7;
@@ -124,7 +125,7 @@ public class RobotHardware {
     //Arm
     public static final double SHORT_ARM = .75;
     public static final double GRAB_ARM = .66;
-    public static final double LONG_ARM = .1;
+    public static final double LONG_ARM = 0;
 
     //Rates
     public static final double WRIST_SERVO_CHANGE_RATE = .004;
@@ -138,13 +139,13 @@ public class RobotHardware {
     public double rightDistance = 8192;
     public static final double PROP_THRESHOLD = 12;
     //DISTANCES NEED TO BE FOUND
-    public static final double blueLeftDistance = 1000;
-    public static final double blueCenterDistance = 1000;
-    public static final double blueRightDistance = 1000;
-    public static final double redLeftDistance = 1000;
-    public static final double redCenterDistance = 1000;
-    public static final double redRightDistance = 1000;
-    public static final double boardDistance = 1000;
+    public static final int BLUE_LEFT_DISTANCE = 1000;
+    public static final int BLUE_CENTER_DISTANCE = 1000;
+    public static final int BLUE_RIGHT_DISTANCE = 1000;
+    public static final int RED_LEFT_DISTANCE = 49;
+    public static final int RED_CENTER_DISTANCE = 55;
+    public static final int RED_RIGHT_DISTANCE = 70;
+    public static final int BOARD_DISTANCE = 20;
 
 
     //Turning Speeds

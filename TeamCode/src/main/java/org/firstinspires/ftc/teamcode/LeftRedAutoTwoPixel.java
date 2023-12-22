@@ -37,8 +37,8 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
         robot.armMotor.setPower(-1);
         drive.backward(70, .45);
         drive.backward(20, .25);
-        double leftDistance = readSensor.distance(robot.leftDistanceSensor);
-        double rightDistance = readSensor.distance(robot.rightDistanceSensor);
+        int leftDistance = (int) readSensor.distance(robot.leftDistanceSensor);
+        int rightDistance = (int) readSensor.distance(robot.rightDistanceSensor);
         telemetry.addData("leftDistance: ", leftDistance);
         telemetry.addData("rightDistance: ", rightDistance);
         telemetry.update();
@@ -77,12 +77,26 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
             drive.backward(10, .2);
             gyroTurn.goodEnough(-90);
             drive.backward(180, .3);
-            robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
+            robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
             robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
             robot.armServo.setPosition(robot.SHORT_ARM);
             strafe.left(67, .2);
+            leftDistance = (int)readSensor.distance(robot.leftDistanceSensor);
+            if (leftDistance<robot.RED_CENTER_DISTANCE){
+                strafe.right(robot.RED_CENTER_DISTANCE - leftDistance,.2);
+            }
+            if (leftDistance>robot.RED_CENTER_DISTANCE){
+                strafe.left(leftDistance - robot.RED_CENTER_DISTANCE,.2);
+            }
+            int rearDistance = (int) readSensor.distance(robot.rearDistanceSensor);
+            if (rearDistance>robot.BOARD_DISTANCE){
+                drive.backward(rearDistance - robot.BOARD_DISTANCE,.2);
+            }
         }
 
+        claws.RightClawOpen();
+        Thread.sleep(250);
+        drive.forward(5,.2);
         robot.armMotor.setTargetPosition(robot.ARM_RESET);
         robot.armServo.setPosition(robot.SHORT_ARM);
         Thread.sleep(30000);
