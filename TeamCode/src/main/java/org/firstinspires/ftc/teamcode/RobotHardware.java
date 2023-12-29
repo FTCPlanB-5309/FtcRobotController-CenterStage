@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
+import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -73,7 +74,7 @@ public class RobotHardware {
     public static final int ARM_RESET = 0;
     public static final int ARM_PIXEL_DROP = -530;
     public static final int ARM_READY = -2271;
-    public static final int ARM_UP = -1309;
+    public static final int ARM_UP = 695;
     public static final int ARM_PIXEL_SCORE = 6000;
 
     //Create Odometry Motors
@@ -97,6 +98,7 @@ public class RobotHardware {
     public Rev2mDistanceSensor rightDistanceSensor = null;
     public Rev2mDistanceSensor leftDistanceSensor = null;
     public Rev2mDistanceSensor rearDistanceSensor = null;
+    public RevTouchSensor armTouchSensor = null;
 
     //Servo Constants
     //Pixel Locks
@@ -105,10 +107,10 @@ public class RobotHardware {
     public static final double RIGHT_PIXEL_UNLOCK = .25;
     public static final double RIGHT_PIXEL_LOCK = .75;
     //Claws
-    public static final double LEFT_CLAW_CLOSE = 0.85;
-    public static final double LEFT_CLAW_OPEN = 0.55;
-    public static final double RIGHT_CLAW_CLOSE = 0.75;
-    public static final double RIGHT_CLAW_OPEN = 0.25;
+    public static final double RIGHT_CLAW_CLOSE = 0.83;
+    public static final double RIGHT_CLAW_OPEN = 0.5;
+    public static final double LEFT_CLAW_CLOSE = 0.72;
+    public static final double LEFT_CLAW_OPEN = 0.25;
     //Wrist
     public static final double UPWARDS_WRIST = .75;
     public static final double RESTING_WRIST = .619;
@@ -124,7 +126,7 @@ public class RobotHardware {
     public static final double HOOK_OUT = .4;
     //Arm
     public static final double SHORT_ARM = .75;
-    public static final double GRAB_ARM = .66;
+    public static final double GRAB_ARM = .6;
     public static final double LONG_ARM = 0;
 
     //Rates
@@ -146,6 +148,7 @@ public class RobotHardware {
     public static final int RED_CENTER_DISTANCE = 55;
     public static final int RED_RIGHT_DISTANCE = 70;
     public static final int BOARD_DISTANCE = 20;
+    public static final int ONE_PIXEL_BOARD_DISTANCE = 10;
 
 
     //Turning Speeds
@@ -220,6 +223,7 @@ public class RobotHardware {
         leftDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "leftDistanceSensor");
         rightDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "rightDistanceSensor");
         rearDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "rearDistanceSensor");
+        armTouchSensor = hwMap.get(RevTouchSensor.class,"armTouchSensor");
 
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
@@ -279,6 +283,7 @@ public class RobotHardware {
         leftClawServo.setPosition(LEFT_CLAW_CLOSE);
         armServo.setPosition(SHORT_ARM);
         hookServo.setPosition(HOOK_IN);
+        wristServo.setPosition(UPWARDS_WRIST);
     }
 //    public void odometry(){
 //

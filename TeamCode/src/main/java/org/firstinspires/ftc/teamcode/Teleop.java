@@ -82,8 +82,8 @@ public class Teleop extends OpMode {
 //        robot.middleOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //        robot.leftOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.hookServo.setPosition(robot.HOOK_IN);
-        robot.leftClawServo.setPosition(robot.LEFT_CLAW_CLOSE);
-        robot.rightClawServo.setPosition(robot.RIGHT_CLAW_CLOSE);
+        robot.leftClawServo.setPosition(robot.LEFT_CLAW_OPEN);
+        robot.rightClawServo.setPosition(robot.RIGHT_CLAW_OPEN);
         robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
         robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
 
@@ -184,6 +184,8 @@ public class Teleop extends OpMode {
         }
 
         //Attachments
+
+
 
         //Right Claw Controls
         if (gamepad2.right_trigger > .5) {
@@ -291,6 +293,7 @@ public class Teleop extends OpMode {
             telemetry.addData("Arm (In/Out) Value", robot.armServo.getPosition());
             telemetry.addData("State of preload", preloadState);
             telemetry.addData("State of LoadPixel", loadpixelState);
+            telemetry.addData("State of armTouchSensor", robot.armTouchSensor.getValue());
             telemetry.addData("Say", "Happy Little Pixels");
 //            telemetry.addData("Left Distance Sensor",robot.leftDistanceSensor.getDistance(DistanceUnit.CM));
 //            telemetry.addData("Right Distance Sensor",robot.rightDistanceSensor.getDistance(DistanceUnit.CM));
@@ -318,15 +321,21 @@ public class Teleop extends OpMode {
 
                 case MOVE_ARM:
                     if (System.currentTimeMillis() > time_arm_move) {
+                        /*
                         robot.armMotor.setTargetPosition(robot.ARM_READY);
                         robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        */
                         robot.armMotor.setPower(-1);
                         preloadState = PreloadStates.WAIT_FOR_ARM;
                     }
                     break;
 
                 case WAIT_FOR_ARM:
-                    if (robot.armMotor.isBusy() == false) {
+
+                    if (robot.armTouchSensor.isPressed()){
+
+                    //if (robot.armMotor.isBusy() == false) {
+                        robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                         robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                         preloadState = PreloadStates.NOT_RUNNING;
                     }
