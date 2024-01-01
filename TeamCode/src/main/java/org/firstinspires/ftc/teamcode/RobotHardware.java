@@ -75,7 +75,7 @@ public class RobotHardware {
     public static final int ARM_PIXEL_DROP = -530;
     public static final int ARM_READY = -2271;
     public static final int ARM_UP = 695;
-    public static final int ARM_PIXEL_SCORE = 6000;
+    public static final int ARM_PIXEL_SCORE = 6897;
 
     //Create Odometry Motors
 //    public DcMotor leftOdometry = null;
@@ -116,7 +116,7 @@ public class RobotHardware {
     public static final double RESTING_WRIST = .619;
     public static final double GRAB_WRIST = .49;
     public static final double WRIST_DROP_PIXEL = .33;
-    public static final double WRIST_SCORE_PIXEL = .73;
+    public static final double WRIST_SCORE_PIXEL = .77;
     public static final double WRIST_SCORE_TWO_PIXEL = .83;
     //Stack
     public static final double STACK_KICK = .3;
@@ -283,7 +283,6 @@ public class RobotHardware {
         leftClawServo.setPosition(LEFT_CLAW_CLOSE);
         armServo.setPosition(SHORT_ARM);
         hookServo.setPosition(HOOK_IN);
-        wristServo.setPosition(UPWARDS_WRIST);
     }
 //    public void odometry(){
 //
