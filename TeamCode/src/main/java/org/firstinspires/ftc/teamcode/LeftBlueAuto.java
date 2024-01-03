@@ -17,7 +17,7 @@ public class LeftBlueAuto extends LinearOpMode {
     ReadSensor readSensor = new ReadSensor(robot, telemetry, this);
     Claws claws = new Claws(robot, telemetry, this);
     PropLocation propLocation;
-    double back_distance;
+    int back_distance;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -56,14 +56,8 @@ public class LeftBlueAuto extends LinearOpMode {
                 gyroTurn.goodEnough(-90);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
-                drive.backward(63, .2);
-                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                if (back_distance > BOARD_DISTANCE){
-                    drive.backward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-                }
-                if (back_distance < BOARD_DISTANCE){
-                    drive.forward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-                }
+                drive.backward(58, .2);
+                drive.move_to_backboard(back_distance);
                 claws.RightClawOpen();
                 Thread.sleep(500);
                 drive.forward(14, .2);
@@ -82,14 +76,8 @@ public class LeftBlueAuto extends LinearOpMode {
                 robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
                 robot.armServo.setPosition(robot.SHORT_ARM);
-                drive.backward(80, .2);
-                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                if (back_distance > BOARD_DISTANCE){
-                    drive.backward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-                }
-                if (back_distance < BOARD_DISTANCE){
-                    drive.forward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-                }
+                drive.backward(73, .2);
+                drive.move_to_backboard(back_distance);
                 claws.RightClawOpen();
                 Thread.sleep(500);
                 drive.forward(10, .2);
@@ -110,15 +98,9 @@ public class LeftBlueAuto extends LinearOpMode {
                 robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
                 robot.armServo.setPosition(robot.SHORT_ARM);
-                drive.backward(78, .2);
+                drive.backward(72, .2);
                 strafe.left(9, .2);
-                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                if (back_distance > BOARD_DISTANCE){
-                    drive.backward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-                }
-                if (back_distance < BOARD_DISTANCE){
-                    drive.forward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-                }
+                drive.move_to_backboard(back_distance);
                 claws.RightClawOpen();
                 Thread.sleep(500);
                 drive.forward(5, .2);

@@ -9,7 +9,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-    @Autonomous(name = "RightRedAuto")
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+@Autonomous(name = "RightRedAuto")
     public class RightRedAuto extends LinearOpMode {
         RobotHardware robot = new RobotHardware();
         Drive drive = new Drive(robot, telemetry, this);
@@ -18,7 +20,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
         ReadSensor readSensor = new ReadSensor(robot, telemetry, this);
         Claws claws = new Claws(robot, telemetry, this);
         PropLocation propLocation;
-        double back_distance;
+        int back_distance;
 
         @Override
         public void runOpMode() throws InterruptedException {
@@ -59,14 +61,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
                     gyroTurn.goodEnough(90);
                     robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
                     robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
-                    drive.backward(78, .2);
+                    drive.backward(72, .2);
                     back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                    if (back_distance > BOARD_DISTANCE){
-                        drive.backward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-                    }
-                    if (back_distance < BOARD_DISTANCE){
-                        drive.forward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-                    }
+                    drive.move_to_backboard(back_distance);
                     strafe.right(9, .2);
                     claws.RightClawOpen();
                     drive.forward(5, .2);
@@ -85,14 +82,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
                     gyroTurn.goodEnough(90);
                     robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
                     robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
-                    drive.backward(78, .2);
+                    drive.backward(72, .2);
                     back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                    if (back_distance > BOARD_DISTANCE){
-                        drive.backward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-                    }
-                    if (back_distance < BOARD_DISTANCE){
-                        drive.forward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-                    }
+                    drive.move_to_backboard(back_distance);
                     claws.RightClawOpen();
                     Thread.sleep(200);
                     drive.forward(10, .2);
@@ -111,16 +103,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
                     gyroTurn.goodEnough(90);
                     robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
                     robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
-                    drive.backward(33, .2);
+                    drive.backward(28, .2);
                     strafe.right(6, .2);
                     back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                    if (back_distance > BOARD_DISTANCE){
-                        drive.backward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-                    }
-                    if (back_distance < BOARD_DISTANCE){
-                        drive.forward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-                    }
-                        claws.RightClawOpen();
+                    drive.move_to_backboard(back_distance);
+                    claws.RightClawOpen();
                         Thread.sleep(500);
                         drive.forward(14, .2);
                         robot.wristServo.setPosition(robot.GRAB_WRIST);
@@ -128,7 +115,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
                         strafe.left(45, .2);
                         break;
                     }
-
 
                 robot.armMotor.setTargetPosition(robot.ARM_RESET);
                 drive.backward(10, .2);

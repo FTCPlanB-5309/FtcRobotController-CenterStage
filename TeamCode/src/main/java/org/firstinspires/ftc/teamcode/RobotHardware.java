@@ -125,8 +125,8 @@ public class RobotHardware {
     public static final double HOOK_IN = .77;
     public static final double HOOK_OUT = .4;
     //Arm
-    public static final double SHORT_ARM = .75;
-    public static final double GRAB_ARM = .6;
+    public static final double SHORT_ARM = 1;
+    public static final double GRAB_ARM = .66;
     public static final double LONG_ARM = 0;
 
     //Rates
@@ -147,7 +147,7 @@ public class RobotHardware {
     public static final int RED_LEFT_DISTANCE = 49;
     public static final int RED_CENTER_DISTANCE = 55;
     public static final int RED_RIGHT_DISTANCE = 70;
-    public static final int BOARD_DISTANCE = 20;
+    public static final int BOARD_DISTANCE = 23;
     public static final int ONE_PIXEL_BOARD_DISTANCE = 10;
 
 
