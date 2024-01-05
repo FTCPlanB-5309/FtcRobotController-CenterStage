@@ -47,16 +47,18 @@ public class LeftBlueAuto extends LinearOpMode {
 
         switch (propLocation) {
             case LEFT:
-                strafe.left(19, .2);
+                strafe.left(24, .2);
                 drive.backward(16, .2);
                 claws.LeftClawOpen();
                 Thread.sleep(500);
                 robot.armServo.setPosition(robot.SHORT_ARM);
-                drive.backward(4, .2);
+                drive.backward(8, .2);
                 gyroTurn.goodEnough(-90);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
                 drive.backward(58, .2);
+                strafe.left(7,.25);
+                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
                 drive.move_to_backboard(back_distance);
                 claws.RightClawOpen();
                 Thread.sleep(500);
@@ -71,12 +73,14 @@ public class LeftBlueAuto extends LinearOpMode {
                 drive.backward(14, .4);
                 claws.LeftClawOpen();
                 Thread.sleep(300);
-                drive.backward(4, .4);
+                drive.backward(8, .4);
                 gyroTurn.goodEnough(-90);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
                 robot.armServo.setPosition(robot.SHORT_ARM);
                 drive.backward(73, .2);
+                strafe.left(10,.25);
+                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
                 drive.move_to_backboard(back_distance);
                 claws.RightClawOpen();
                 Thread.sleep(500);
@@ -99,7 +103,8 @@ public class LeftBlueAuto extends LinearOpMode {
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
                 robot.armServo.setPosition(robot.SHORT_ARM);
                 drive.backward(72, .2);
-                strafe.left(9, .2);
+                strafe.left(20, .2);
+                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
                 drive.move_to_backboard(back_distance);
                 claws.RightClawOpen();
                 Thread.sleep(500);

@@ -116,7 +116,7 @@ public class RobotHardware {
     public static final double RESTING_WRIST = .619;
     public static final double GRAB_WRIST = .49;
     public static final double WRIST_DROP_PIXEL = .33;
-    public static final double WRIST_SCORE_PIXEL = .77;
+    public static final double WRIST_SCORE_PIXEL = .83;
     public static final double WRIST_SCORE_TWO_PIXEL = .83;
     //Stack
     public static final double STACK_KICK = .3;
@@ -126,7 +126,7 @@ public class RobotHardware {
     public static final double HOOK_OUT = .4;
     //Arm
     public static final double SHORT_ARM = 1;
-    public static final double GRAB_ARM = .66;
+    public static final double GRAB_ARM = .62;
     public static final double LONG_ARM = 0;
 
     //Rates
