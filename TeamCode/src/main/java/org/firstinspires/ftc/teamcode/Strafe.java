@@ -10,6 +10,8 @@ public class Strafe {
     Telemetry telemetry;
     LinearOpMode linearOpMode;
     DriveTrain driveTrain;
+    ReadSensor readSensor;
+    PropLocation propLocation;
 
 
     public Strafe(RobotHardware robot, Telemetry telemetry, LinearOpMode linearOpMode){
@@ -86,6 +88,13 @@ public class Strafe {
         robot.backRightMotor.setPower(speed);
         robot.frontLeftMotor.setPower(speed);
         robot.backLeftMotor.setPower(-speed);
+    }
+
+    public void strafe_to_location (int side_distance){
+        if (!linearOpMode.opModeIsActive())
+            return;
+
+
     }
 
 }

@@ -65,7 +65,7 @@ public class LeftBlueAuto extends LinearOpMode {
                 drive.forward(14, .2);
                 robot.wristServo.setPosition(robot.GRAB_WRIST);
                 robot.armMotor.setTargetPosition(0);
-                strafe.right(55, .2);
+                strafe.right(55, .3);
                 break;
 
             case CENTER:
@@ -87,7 +87,7 @@ public class LeftBlueAuto extends LinearOpMode {
                 drive.forward(10, .2);
                 robot.wristServo.setPosition(robot.GRAB_WRIST);
                 robot.armMotor.setTargetPosition(0);
-                strafe.right(60, .2);
+                strafe.right(60, .3);
                 break;
 
             case RIGHT:
@@ -111,7 +111,7 @@ public class LeftBlueAuto extends LinearOpMode {
                 drive.forward(5, .2);
                 robot.wristServo.setPosition(robot.GRAB_WRIST);
                 robot.armMotor.setTargetPosition(0);
-                strafe.left(55, .2);
+                strafe.right(87, .3);
                 break;
         }
 

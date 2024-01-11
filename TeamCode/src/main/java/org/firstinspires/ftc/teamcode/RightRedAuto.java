@@ -21,6 +21,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
         Claws claws = new Claws(robot, telemetry, this);
         PropLocation propLocation;
         int back_distance;
+        int side_distance;
 
         @Override
         public void runOpMode() throws InterruptedException {
@@ -69,7 +70,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
                     drive.forward(5, .2);
                     robot.wristServo.setPosition(robot.GRAB_WRIST);
                     robot.armMotor.setTargetPosition(0);
-                    strafe.right(55, .2);
+                    strafe.left(75, .3);
                     break;
 
                 case CENTER:
@@ -90,7 +91,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
                     drive.forward(10, .2);
                     robot.wristServo.setPosition(robot.GRAB_WRIST);
                     robot.armMotor.setTargetPosition(0);
-                    strafe.left(60, .2);
+                    strafe.left(60, .3);
                     break;
 
                 case RIGHT: //same a leftblueleft
@@ -112,7 +113,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
                         drive.forward(14, .2);
                         robot.wristServo.setPosition(robot.GRAB_WRIST);
                         robot.armMotor.setTargetPosition(0);
-                        strafe.left(45, .2);
+                        strafe.left(45, .3);
                         break;
                     }
 

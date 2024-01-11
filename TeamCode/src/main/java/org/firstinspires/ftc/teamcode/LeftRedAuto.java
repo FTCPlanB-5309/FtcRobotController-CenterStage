@@ -15,6 +15,8 @@ public class LeftRedAuto extends LinearOpMode {
     GyroTurn gyroTurn = new GyroTurn(robot, telemetry, this);
     ReadSensor readSensor = new ReadSensor(robot, telemetry, this);
     Claws claws = new Claws(robot,telemetry,this);
+    PropLocation propLocation;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -27,50 +29,56 @@ public class LeftRedAuto extends LinearOpMode {
         robot.armMotor.setTargetPosition(ARM_PIXEL_DROP);
         robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.armMotor.setPower(-1);
-        Thread.sleep(100);
-        drive.forward(71, .25);
+        drive.forward(67, .25);
         double leftDistance = readSensor.distance(robot.leftDistanceSensor);
         double rightDistance = readSensor.distance(robot.rightDistanceSensor);
+        propLocation = propLocation.CENTER;
+        if (leftDistance < robot.PROP_THRESHOLD) {
+            propLocation = propLocation.LEFT;
+        }
+        if (rightDistance < robot.PROP_THRESHOLD){
+            propLocation = propLocation.RIGHT;
+        }
         telemetry.addData("leftDistance: ",leftDistance);
         telemetry.addData("rightDistance: ",rightDistance);
+        telemetry.addData("propLocation", propLocation);
         telemetry.update();
+        Thread.sleep(1000);
 
         //left (same as RightRedRIGHT)
-        if(leftDistance < robot.PROP_THRESHOLD){
-            strafe.left(15, .2);
-            drive.backward(5,.2);
-            gyroTurn.goodEnough(-90);
-            Thread.sleep(500);
-            drive.forward(30,.2);
-            drive.backward(12,.2);
-            gyroTurn.goodEnough(-45);
-            claws.LeftClawOpen();
-            Thread.sleep(250);
-            drive.backward(5,.2);
-            robot.wristServo.setPosition(robot.GRAB_WRIST);
-            robot.armMotor.setTargetPosition(0);
-        }
+        switch (propLocation){
+            case LEFT:
+                strafe.left(32,.2);
+                drive.backward(16,.2);
+                claws.LeftClawOpen();
+                drive.backward(10, .2);
+                robot.wristServo.setPosition(robot.GRAB_WRIST);
+                robot.armMotor.setTargetPosition(0);
+                break;
 
-        //right (same as RightRedLEFT)
-        else if(rightDistance < robot.PROP_THRESHOLD){
-            strafe.left(37,.2);
-            drive.backward(16,.2);
-            claws.LeftClawOpen();
-            drive.backward(10, .2);
-            robot.wristServo.setPosition(robot.GRAB_WRIST);
-            robot.armMotor.setTargetPosition(0);
-        }
+            case CENTER:
+                drive.forward(14,.2);
+                drive.backward(18, .4);
+                claws.LeftClawOpen();
+                Thread.sleep(500);
+                drive.backward(10, .2);
+                robot.armMotor.setTargetPosition(0);
+                break;
 
-        //middle
-        else{
-            drive.forward(10,.2);
-            drive.backward(14, .4);
-            claws.LeftClawOpen();
-            Thread.sleep(300);
-            drive.backward(10, .2);
-            robot.armMotor.setTargetPosition(0);
+            case RIGHT:
+                strafe.left(15, .2);
+                drive.backward(5,.2);
+                gyroTurn.goodEnough(-90);
+                Thread.sleep(500);
+                drive.forward(30,.2);
+                drive.backward(10,.2);
+                claws.LeftClawOpen();
+                Thread.sleep(750);
+                drive.backward(5,.2);
+                robot.wristServo.setPosition(robot.GRAB_WRIST);
+                robot.armMotor.setTargetPosition(0);
+                break;
         }
-
 
         robot.armMotor.setTargetPosition(robot.ARM_RESET);
         robot.armServo.setPosition(robot.SHORT_ARM);
