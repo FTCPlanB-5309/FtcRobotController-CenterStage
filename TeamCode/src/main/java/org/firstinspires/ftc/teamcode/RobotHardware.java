@@ -114,9 +114,9 @@ public class RobotHardware {
     //Wrist
     public static final double UPWARDS_WRIST = .75;
     public static final double RESTING_WRIST = .619;
-    public static final double GRAB_WRIST = .49;
+    public static final double GRAB_WRIST = .48;
     public static final double WRIST_DROP_PIXEL = .33;
-    public static final double WRIST_SCORE_PIXEL = .83;
+    public static final double WRIST_SCORE_PIXEL = .77;
     public static final double WRIST_SCORE_TWO_PIXEL = .83;
     //Stack
     public static final double STACK_KICK = .3;
