@@ -24,14 +24,9 @@ public class LeftBlueAuto extends LinearOpMode {
         robot.init(hardwareMap);
         robot.auto_init();
         waitForStart();
-        robot.armServo.setPosition(robot.LONG_ARM);
-        robot.wristServo.setPosition(robot.WRIST_DROP_PIXEL);
-        Thread.sleep(100);
-        robot.armMotor.setTargetPosition(ARM_PIXEL_DROP);
-        robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.armMotor.setPower(-1);
-        Thread.sleep(100);
+        robot.wristServo.setPosition(robot.UPWARDS_WRIST);
         drive.forward(71, .25);
+        Thread.sleep(500);
         double leftDistance = readSensor.distance(robot.leftDistanceSensor);
         double rightDistance = readSensor.distance(robot.rightDistanceSensor);
         propLocation = propLocation.CENTER;
@@ -47,15 +42,19 @@ public class LeftBlueAuto extends LinearOpMode {
 
         switch (propLocation) {
             case LEFT:
+                robot.intakeMotor.setPower(-.25);
                 strafe.left(24, .2);
+                robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
+                Thread.sleep(300);
                 drive.backward(16, .2);
-                claws.LeftClawOpen();
                 Thread.sleep(500);
-                robot.armServo.setPosition(robot.SHORT_ARM);
                 drive.backward(8, .2);
+                robot.intakeMotor.setPower(0);
                 gyroTurn.goodEnough(-90);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
+                robot.armMotor.setPower(-1);
                 drive.backward(58, .2);
                 strafe.left(7,.25);
                 back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
@@ -69,15 +68,19 @@ public class LeftBlueAuto extends LinearOpMode {
                 break;
 
             case CENTER:
+                robot.intakeMotor.setPower(-.25);
                 drive.forward(10, .2);
+                robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
+                Thread.sleep(300);
                 drive.backward(14, .4);
-                claws.LeftClawOpen();
                 Thread.sleep(300);
                 drive.backward(8, .4);
+                robot.intakeMotor.setPower(0);
                 gyroTurn.goodEnough(-90);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
-                robot.armServo.setPosition(robot.SHORT_ARM);
+                robot.armMotor.setPower(-1);
                 drive.backward(73, .2);
                 strafe.left(10,.25);
                 back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
@@ -95,15 +98,17 @@ public class LeftBlueAuto extends LinearOpMode {
                 drive.backward(5, .2);
                 gyroTurn.goodEnough(-90);
                 Thread.sleep(1000);
+                robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
                 drive.forward(35, .2);
+                robot.intakeMotor.setPower(-.25);
                 drive.backward(15, .2);
-                claws.LeftClawOpen();
-                Thread.sleep(500);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
-                robot.armServo.setPosition(robot.SHORT_ARM);
+                robot.armMotor.setPower(-1);
                 drive.backward(72, .2);
-                strafe.left(20, .2);
+                robot.intakeMotor.setPower(0);
+                strafe.left(23, .2);
                 back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
                 drive.move_to_backboard(back_distance);
                 claws.RightClawOpen();

@@ -69,38 +69,46 @@ public class RightBlueAutoTwoPixel extends LinearOpMode {
 
         //middle ROBOT IS STARTING BACKWARDS not completed
         else {
-            drive.backward(34, .2);
-            claws.LeftClawOpen();
+            robot.intakeMotor.setPower(-.25);
+            drive.backward(8, .25);
+            robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
+            drive.backward(34, .25);
             Thread.sleep(300);
-            drive.backward(10, .2);
             gyroTurn.goodEnough(90);
+            robot.intakeMotor.setPower(0);
             drive.backward(180, .3);
-            robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
+            robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
+            robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
-            robot.armServo.setPosition(robot.SHORT_ARM);
+            robot.armMotor.setPower(-1);
             strafe.right(67, .2);
-            rightDistance = (int)readSensor.distance(robot.rightDistanceSensor);
-            if (rightDistance<robot.BLUE_CENTER_DISTANCE){
-                strafe.left(robot.BLUE_CENTER_DISTANCE - rightDistance,.2);
+            Thread.sleep(100000);
+            leftDistance = (int)readSensor.distance(robot.leftDistanceSensor);
+            if (leftDistance<robot.RED_CENTER_DISTANCE){
+                strafe.right(robot.RED_CENTER_DISTANCE - leftDistance,.2);
             }
-            if (rightDistance>robot.BLUE_CENTER_DISTANCE){
-                strafe.right(rightDistance - robot.BLUE_CENTER_DISTANCE,.2);
+            if (leftDistance>robot.RED_CENTER_DISTANCE){
+                strafe.left(leftDistance - robot.RED_CENTER_DISTANCE,.2);
             }
             int rearDistance = (int) readSensor.distance(robot.rearDistanceSensor);
             if (rearDistance>robot.BOARD_DISTANCE){
                 drive.backward(rearDistance - robot.BOARD_DISTANCE,.2);
+                }
+
+            claws.RightClawOpen();
+            Thread.sleep(250);
+            drive.forward(5,.2);
+            robot.armMotor.setTargetPosition(robot.ARM_RESET);
+            robot.armServo.setPosition(robot.SHORT_ARM);
+            Thread.sleep(30000);
+
             }
         }
 
 
-        claws.RightClawOpen();
-        Thread.sleep(250);
-        drive.forward(5,.2);
-        robot.armMotor.setTargetPosition(robot.ARM_RESET);
-        robot.armServo.setPosition(robot.SHORT_ARM);
-        Thread.sleep(30000);
+
+
+
 
 
     }
-
-}
