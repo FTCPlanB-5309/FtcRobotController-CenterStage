@@ -16,6 +16,7 @@ public class LeftRedAuto extends LinearOpMode {
     ReadSensor readSensor = new ReadSensor(robot, telemetry, this);
     Claws claws = new Claws(robot,telemetry,this);
     PropLocation propLocation;
+    FindProp findProp;
 
 
     @Override
@@ -30,19 +31,7 @@ public class LeftRedAuto extends LinearOpMode {
         robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.armMotor.setPower(-1);
         drive.forward(67, .25);
-        double leftDistance = readSensor.distance(robot.leftDistanceSensor);
-        double rightDistance = readSensor.distance(robot.rightDistanceSensor);
-        propLocation = propLocation.CENTER;
-        if (leftDistance < robot.PROP_THRESHOLD) {
-            propLocation = propLocation.LEFT;
-        }
-        if (rightDistance < robot.PROP_THRESHOLD){
-            propLocation = propLocation.RIGHT;
-        }
-        telemetry.addData("leftDistance: ",leftDistance);
-        telemetry.addData("rightDistance: ",rightDistance);
-        telemetry.addData("propLocation", propLocation);
-        telemetry.update();
+        propLocation = findProp.FindPropForward();
         Thread.sleep(1000);
 
         //left (same as RightRedRIGHT)

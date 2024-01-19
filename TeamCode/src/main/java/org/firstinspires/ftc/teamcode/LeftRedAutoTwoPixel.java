@@ -24,6 +24,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
     ReadSensor readSensor = new ReadSensor(robot, telemetry, this);
     Claws claws = new Claws(robot, telemetry, this);
     PropLocation propLocation;
+    FindProp findProp;
     int back_distance;
     int side_distance;
 
@@ -42,16 +43,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
         drive.backward(20, .25);
         int leftDistance = (int) readSensor.distance(robot.leftDistanceSensor);
         int rightDistance = (int) readSensor.distance(robot.rightDistanceSensor);
-        propLocation = propLocation.CENTER;
-        if (leftDistance < robot.PROP_THRESHOLD) {
-            propLocation = propLocation.LEFT;
-        }
-        if (rightDistance < robot.PROP_THRESHOLD){
-            propLocation = propLocation.RIGHT;
-        }
-        telemetry.addData("leftDistance: ", leftDistance);
-        telemetry.addData("rightDistance: ", rightDistance);
-        telemetry.update();
+        propLocation = findProp.FindPropBackward();
 
         //left not completed
         switch (propLocation){

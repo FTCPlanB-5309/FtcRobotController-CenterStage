@@ -17,28 +17,19 @@ public class LeftBlueAuto extends LinearOpMode {
     ReadSensor readSensor = new ReadSensor(robot, telemetry, this);
     Claws claws = new Claws(robot, telemetry, this);
     PropLocation propLocation;
+    FindProp findProp;
     int back_distance;
 
     @Override
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
         robot.auto_init();
+        robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_LOCK);
         waitForStart();
         robot.wristServo.setPosition(robot.UPWARDS_WRIST);
         drive.forward(71, .25);
         Thread.sleep(500);
-        double leftDistance = readSensor.distance(robot.leftDistanceSensor);
-        double rightDistance = readSensor.distance(robot.rightDistanceSensor);
-        propLocation = propLocation.CENTER;
-        if (leftDistance < robot.PROP_THRESHOLD) {
-            propLocation = propLocation.LEFT;
-        }
-        if (rightDistance < robot.PROP_THRESHOLD) {
-            propLocation = propLocation.RIGHT;
-        }
-        telemetry.addData("leftDistance: ", leftDistance);
-        telemetry.addData("rightDistance: ", rightDistance);
-        telemetry.update();
+        propLocation = findProp.FindPropForward();
 
         switch (propLocation) {
             case LEFT:

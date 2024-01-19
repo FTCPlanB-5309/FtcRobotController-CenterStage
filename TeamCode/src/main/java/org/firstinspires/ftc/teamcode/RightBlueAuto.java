@@ -16,6 +16,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
         ReadSensor readSensor = new ReadSensor(robot, telemetry, this);
         Claws claws = new Claws(robot,telemetry,this);
         PropLocation propLocation;
+        FindProp findProp;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -24,18 +25,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
         waitForStart();
         robot.wristServo.setPosition(robot.UPWARDS_WRIST);
         drive.backward(90, .25);
-        int leftDistance = (int) readSensor.distance(robot.leftDistanceSensor);
-        int rightDistance = (int) readSensor.distance(robot.rightDistanceSensor);
-        propLocation = propLocation.CENTER;
-        if (leftDistance < robot.PROP_THRESHOLD) {
-            propLocation = propLocation.LEFT;
-        }
-        if (rightDistance < robot.PROP_THRESHOLD){
-            propLocation = propLocation.RIGHT;
-        }
-        telemetry.addData("leftDistance: ", leftDistance);
-        telemetry.addData("rightDistance: ", rightDistance);
-        telemetry.update();
+        propLocation = findProp.FindPropForward();
 
         switch (propLocation){
             case LEFT:

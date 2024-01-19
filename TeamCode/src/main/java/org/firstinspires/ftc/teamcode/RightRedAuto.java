@@ -19,6 +19,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
         GyroTurn gyroTurn = new GyroTurn(robot, telemetry, this);
         ReadSensor readSensor = new ReadSensor(robot, telemetry, this);
         Claws claws = new Claws(robot, telemetry, this);
+        FindProp findProp = new FindProp(robot, telemetry, this);
         PropLocation propLocation;
         int back_distance;
         int side_distance;
@@ -27,102 +28,93 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
         public void runOpMode() throws InterruptedException {
             robot.init(hardwareMap);
             robot.auto_init();
+            robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_LOCK);
             waitForStart();
-            robot.armServo.setPosition(robot.LONG_ARM);
-            robot.wristServo.setPosition(robot.WRIST_DROP_PIXEL);
-            robot.armMotor.setTargetPosition(ARM_PIXEL_DROP);
-            robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.armMotor.setPower(-1);
+            robot.wristServo.setPosition(robot.UPWARDS_WRIST);
             drive.forward(71, .25);
-            double leftDistance = readSensor.distance(robot.leftDistanceSensor);
-            double rightDistance = readSensor.distance(robot.rightDistanceSensor);
-                propLocation = propLocation.CENTER;
-            if (leftDistance < robot.PROP_THRESHOLD) {
-                propLocation = propLocation.LEFT;
-            }
-            if (rightDistance < robot.PROP_THRESHOLD){
-                propLocation = propLocation.RIGHT;
-            }
-            telemetry.addData("leftDistance: ", leftDistance);
-            telemetry.addData("rightDistance: ", rightDistance);
-            telemetry.update();
+            Thread.sleep(500);
+            propLocation = findProp.FindPropForward();
 
             switch(propLocation){
                 case LEFT: //same as leftblueright
-                    strafe.right(15, .2);
-                    drive.backward(5, .2);
+                    strafe.right(15, .25);
+                    drive.backward(5, .25);
                     gyroTurn.goodEnough(90);
-                    Thread.sleep(1000);
-                    drive.forward(35, .2);
-                    drive.backward(15, .2);
-                    gyroTurn.goodEnough(45);
-                    claws.LeftClawOpen();
                     Thread.sleep(500);
-                    robot.armServo.setPosition(robot.SHORT_ARM);
-                    gyroTurn.goodEnough(90);
+                    robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
+                    Thread.sleep(500);
+                    drive.forward(35, .25);
+                    robot.intakeMotor.setPower(-.25);
+                    drive.backward(15, .25);
                     robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
                     robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
-                    drive.backward(72, .2);
+                    robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    robot.armMotor.setPower(-1);
+                    drive.backward(72, .25);
+                    robot.intakeMotor.setPower(0);
                     back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
                     drive.move_to_backboard(back_distance);
-                    strafe.right(9, .2);
+                    strafe.right(9, .25);
                     claws.RightClawOpen();
-                    drive.forward(5, .2);
+                    drive.forward(5, .25);
                     robot.wristServo.setPosition(robot.GRAB_WRIST);
                     robot.armMotor.setTargetPosition(0);
                     strafe.left(75, .3);
                     break;
 
                 case CENTER:
-                    drive.forward(10, .2);
-                    drive.backward(14, .4);
-                    claws.LeftClawOpen();
-                    Thread.sleep(500);
-                    robot.armServo.setPosition(robot.SHORT_ARM);
-                    drive.backward(7, .4);
+                    robot.intakeMotor.setPower(-.25);
+                    drive.forward(15, .25);
+                    robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
+                    Thread.sleep(300);
+                    drive.backward(28, .25);
+                    robot.intakeMotor.setPower(0);
                     gyroTurn.goodEnough(90);
                     robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
                     robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
-                    drive.backward(72, .2);
+                    robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    robot.armMotor.setPower(-1);
+                    drive.backward(72, .25);
                     back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
                     drive.move_to_backboard(back_distance);
                     claws.RightClawOpen();
                     Thread.sleep(200);
-                    drive.forward(10, .2);
+                    drive.forward(10, .25);
                     robot.wristServo.setPosition(robot.GRAB_WRIST);
                     robot.armMotor.setTargetPosition(0);
-                    strafe.left(60, .3);
+                    strafe.left(65, .25);
                     break;
 
                 case RIGHT: //same a leftblueleft
-                    strafe.right(37, .2);
-                    drive.backward(20, .2);
-                    claws.LeftClawOpen();
+                    robot.intakeMotor.setPower(-.25);
+                    strafe.right(24, .25);
+                    robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
+                    Thread.sleep(300);
+                    drive.backward(20, .25);
                     Thread.sleep(500);
-                    robot.armServo.setPosition(robot.SHORT_ARM);
-                    drive.backward(18, .2);
+                    drive.backward(18, .25);
+                    robot.intakeMotor.setPower(0);
                     gyroTurn.goodEnough(90);
                     robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
                     robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
-                    drive.backward(28, .2);
-                    strafe.right(6, .2);
+                    robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    robot.armMotor.setPower(-1);
+                    drive.backward(39, .25);
+                    strafe.right(6, .25);
                     back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
                     drive.move_to_backboard(back_distance);
                     claws.RightClawOpen();
-                        Thread.sleep(500);
-                        drive.forward(14, .2);
-                        robot.wristServo.setPosition(robot.GRAB_WRIST);
-                        robot.armMotor.setTargetPosition(0);
-                        strafe.left(45, .3);
-                        break;
+                    Thread.sleep(500);
+                    drive.forward(14, .25);
+                    robot.wristServo.setPosition(robot.GRAB_WRIST);
+                    robot.armMotor.setTargetPosition(0);
+                    strafe.left(40, .3);
+                    break;
                     }
 
                 robot.armMotor.setTargetPosition(robot.ARM_RESET);
                 drive.backward(10, .2);
                 robot.armServo.setPosition(robot.SHORT_ARM);
-                Thread.sleep(30000);
-
-
             }
         }
 
