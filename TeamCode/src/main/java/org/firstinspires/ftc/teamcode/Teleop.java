@@ -315,8 +315,6 @@ public class Teleop extends OpMode {
                     robot.wristServo.setPosition(robot.GRAB_WRIST);
                     robot.leftClawServo.setPosition(robot.LEFT_CLAW_OPEN);
                     robot.rightClawServo.setPosition(robot.RIGHT_CLAW_OPEN);
-                    robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
-                    robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
                     robot.armServo.setPosition(robot.SHORT_ARM);
                     preloadState = PreloadStates.MOVE_ARM;
                     break;

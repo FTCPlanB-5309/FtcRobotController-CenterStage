@@ -74,8 +74,9 @@ public class RobotHardware {
     public static final int ARM_RESET = 0;
     public static final int ARM_PIXEL_DROP = -530;
     public static final int ARM_READY = -2271;
-    public static final int ARM_UP = 695;
+    public static final int ARM_UP = 435;
     public static final int ARM_PIXEL_SCORE = 4815;
+    public static final int ARM_PIXEL_SCORE_HIGH = 4415;
 
     //Create Odometry Motors
 //    public DcMotor leftOdometry = null;
