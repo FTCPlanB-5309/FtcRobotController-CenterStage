@@ -1,15 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.teamcode.RobotHardware.ARM_PIXEL_DROP;
-import static org.firstinspires.ftc.teamcode.RobotHardware.BOARD_DISTANCE;
-import static org.firstinspires.ftc.teamcode.RobotHardware.ONE_PIXEL_BOARD_DISTANCE;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Autonomous(name = "RightRedAuto")
     public class RightRedAuto extends LinearOpMode {
@@ -53,7 +46,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
                     drive.backward(72, .25);
                     robot.intakeMotor.setPower(0);
                     back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                    drive.move_to_backboard(back_distance);
+                    drive.move_to_backboard_one_pixel(back_distance);
                     strafe.right(9, .25);
                     claws.RightClawOpen();
                     drive.forward(5, .25);
@@ -76,7 +69,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
                     robot.armMotor.setPower(-1);
                     drive.backward(72, .25);
                     back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                    drive.move_to_backboard(back_distance);
+                    drive.move_to_backboard_one_pixel(back_distance);
                     claws.RightClawOpen();
                     Thread.sleep(200);
                     drive.forward(10, .25);
@@ -102,7 +95,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
                     drive.backward(39, .25);
                     strafe.right(6, .25);
                     back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                    drive.move_to_backboard(back_distance);
+                    drive.move_to_backboard_one_pixel(back_distance);
                     claws.RightClawOpen();
                     Thread.sleep(500);
                     drive.forward(14, .25);

@@ -1,16 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.teamcode.RobotHardware.BOARD_DISTANCE;
-
-import androidx.annotation.RequiresPermission;
+import static org.firstinspires.ftc.teamcode.RobotHardware.ONE_PIXEL_BOARD_DISTANCE;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class Drive {
+    //fix that
+
     RobotHardware robot;
     Telemetry telemetry;
     LinearOpMode linearOpMode;
@@ -84,17 +82,31 @@ public class Drive {
         driveTrain.stop();
     }
 
-    public void move_to_backboard (int back_distance){
+    public void move_to_backboard_one_pixel (int back_distance){
         if (!linearOpMode.opModeIsActive())
             return;
-        if (back_distance > BOARD_DISTANCE){
-            backward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-            telemetry.addData("amountMovedBackward", (Math.abs((int)back_distance- robot.BOARD_DISTANCE)));
+        if (back_distance > robot.ONE_PIXEL_BOARD_DISTANCE){
+            backward (Math.abs((int)back_distance- robot.ONE_PIXEL_BOARD_DISTANCE), .2);
+            telemetry.addData("amountMovedBackward", (Math.abs((int)back_distance- robot.ONE_PIXEL_BOARD_DISTANCE)));
             telemetry.update();
         }
-        if (back_distance < BOARD_DISTANCE){
-            forward (Math.abs((int)back_distance- robot.BOARD_DISTANCE), .2);
-            telemetry.addData("amountMovedForward", (Math.abs((int)back_distance- robot.BOARD_DISTANCE)));
+        if (back_distance < robot.ONE_PIXEL_BOARD_DISTANCE){
+            forward (Math.abs((int)back_distance- robot.ONE_PIXEL_BOARD_DISTANCE), .2);
+            telemetry.addData("amountMovedForward", (Math.abs((int)back_distance- robot.ONE_PIXEL_BOARD_DISTANCE)));
+        }
+    }
+
+    public void move_to_backboard_two_pixel (int back_distance){
+        if (!linearOpMode.opModeIsActive())
+            return;
+        if (back_distance > robot.TWO_PIXEL_BOARD_DISTANCE){
+            backward (Math.abs((int)back_distance- robot.TWO_PIXEL_BOARD_DISTANCE), .2);
+            telemetry.addData("amountMovedBackward", (Math.abs((int)back_distance- robot.TWO_PIXEL_BOARD_DISTANCE)));
+            telemetry.update();
+        }
+        if (back_distance < robot.TWO_PIXEL_BOARD_DISTANCE){
+            forward (Math.abs((int)back_distance- robot.TWO_PIXEL_BOARD_DISTANCE), .2);
+            telemetry.addData("amountMovedForward", (Math.abs((int)back_distance- robot.TWO_PIXEL_BOARD_DISTANCE)));
         }
     }
 }

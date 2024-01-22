@@ -33,10 +33,9 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
         robot.init(hardwareMap);
         robot.auto_init();
         robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_LOCK);
-        robot.wristServo.setPosition(robot.UPWARDS_WRIST);
         waitForStart();
+        robot.wristServo.setPosition(robot.UPWARDS_WRIST);
         drive.backward(86, .25);
-
         int leftDistance = (int) readSensor.distance(robot.leftDistanceSensor);
         int rightDistance = (int) readSensor.distance(robot.rightDistanceSensor);
         propLocation = findProp.FindPropBackward();
@@ -44,41 +43,57 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
         //left not completed
         switch (propLocation){
             case LEFT:
-                strafe.right(15, .25);
-                drive.backward(15, .25);
+                strafe.right(33, .25);
                 robot.intakeMotor.setPower(-.25);
                 robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
-                drive.backward(15, .25);
+                drive.backward(36, .25);
+                robot.intakeMotor.setPower(0);
                 gyroTurn.goodEnough(-90);
-                Thread.sleep(500);
-                drive.forward(30, .25);
-                drive.backward(12, .25);
-                gyroTurn.goodEnough(-90);
+                Thread.sleep(300);
+                //2nd Pixel Scoring
+                drive.backward(218, .5);
+                robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
+                robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.armMotor.setPower(-1);
+                strafe.left(36, .25);
+                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
+                drive.move_to_backboard_two_pixel(back_distance);
+                claws.RightClawOpen();
                 claws.LeftClawOpen();
-                Thread.sleep(250);
-                drive.backward(5, .2);
-                robot.wristServo.setPosition(robot.GRAB_WRIST);
-                robot.armMotor.setTargetPosition(0);
+                Thread.sleep(500);
+                drive.forward(4, .25);
                 break;
 
             case CENTER:
-                drive.backward(34, .2);
-                claws.LeftClawOpen();
-                Thread.sleep(300);
-                drive.backward(10, .2);
+                drive.backward(12, .25);
+                robot.intakeMotor.setPower(-.25);
+                robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
+                Thread.sleep(250);
+                drive.backward(25,.25);
+                robot.intakeMotor.setPower(0);
                 gyroTurn.goodEnough(-90);
-                drive.backward(180, .3);
+                Thread.sleep(300);
+                //2nd pixel scoring
+                drive.backward(190, .5);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
-                robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
-                robot.armServo.setPosition(robot.SHORT_ARM);
-                strafe.left(67, .2);
+                robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                robot.armMotor.setPower(-1);
+                strafe.left(56, .25);
+                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
+                drive.move_to_backboard_two_pixel(back_distance);
+                claws.RightClawOpen();
+                claws.LeftClawOpen();
+                Thread.sleep(500);
+                drive.forward(4, .25);
                 break;
 
             case RIGHT:
 
                 //first part from leftRedAuto
                 strafe.right(15, .25);
-                gyroTurn.goodEnough(90);
+                gyroTurn.goodEnough(89);
                 strafe.right(20, .25);
                 drive.forward(35,.25);
                 robot.intakeMotor.setPower(-.25);
@@ -89,30 +104,25 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
                 strafe.left(65,.25);
                 gyroTurn.goodEnough(-90);
                 //2nd Pixel Scoring
-                drive.backward(180, .75);
+                drive.backward(190, .75);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);
-                strafe.left(85, .45);
+                strafe.left(72, .35);
                 back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                drive.move_to_backboard(back_distance);
+                drive.move_to_backboard_two_pixel(back_distance);
                 claws.RightClawOpen();
                 claws.LeftClawOpen();
                 Thread.sleep(500);
-                drive.forward(8, .25);
+                drive.forward(4, .25);
                 break;
 
 
 
         }
-
         robot.wristServo.setPosition(robot.GRAB_WRIST);
-        robot.armMotor.setTargetPosition(0);
         robot.armMotor.setTargetPosition(robot.ARM_RESET);
-        Thread.sleep(30000);
-
-
     }
 
 }

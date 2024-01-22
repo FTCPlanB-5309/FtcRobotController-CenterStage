@@ -148,12 +148,12 @@ public class RobotHardware {
     public static final int RED_LEFT_DISTANCE = 49;
     public static final int RED_CENTER_DISTANCE = 55;
     public static final int RED_RIGHT_DISTANCE = 70;
-    public static final int BOARD_DISTANCE = 23;
+    public static final int ONE_PIXEL_BOARD_DISTANCE = 23;
+    public static final int TWO_PIXEL_BOARD_DISTANCE = 21;
     //ROUGH ESTIMATES THEY NEED TO BE CHANGED
     public static final int LEFT_CASE_WALL_DISTANCE = 40;
     public static final int RIGHT_CASE_WALL_DISTANCE = 20;
     public static final int CENTER_CASE_WALL_DISTANCE = 30;
-    public static final int ONE_PIXEL_BOARD_DISTANCE = 10;
 
 
     //Turning Speeds

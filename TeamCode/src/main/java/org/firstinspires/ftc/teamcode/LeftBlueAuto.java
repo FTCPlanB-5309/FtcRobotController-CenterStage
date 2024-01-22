@@ -1,9 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 
-import static org.firstinspires.ftc.teamcode.RobotHardware.ARM_PIXEL_DROP;
-import static org.firstinspires.ftc.teamcode.RobotHardware.BOARD_DISTANCE;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -49,7 +46,7 @@ public class LeftBlueAuto extends LinearOpMode {
                 drive.backward(58, .2);
                 strafe.left(7,.25);
                 back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                drive.move_to_backboard(back_distance);
+                drive.move_to_backboard_one_pixel(back_distance);
                 claws.RightClawOpen();
                 Thread.sleep(500);
                 drive.forward(14, .2);
@@ -75,7 +72,7 @@ public class LeftBlueAuto extends LinearOpMode {
                 drive.backward(73, .2);
                 strafe.left(10,.25);
                 back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                drive.move_to_backboard(back_distance);
+                drive.move_to_backboard_one_pixel(back_distance);
                 claws.RightClawOpen();
                 Thread.sleep(500);
                 drive.forward(10, .2);
@@ -101,7 +98,7 @@ public class LeftBlueAuto extends LinearOpMode {
                 robot.intakeMotor.setPower(0);
                 strafe.left(23, .2);
                 back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
-                drive.move_to_backboard(back_distance);
+                drive.move_to_backboard_one_pixel(back_distance);
                 claws.RightClawOpen();
                 Thread.sleep(500);
                 drive.forward(5, .2);
