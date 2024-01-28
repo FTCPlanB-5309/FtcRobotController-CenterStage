@@ -70,12 +70,11 @@ public class RobotHardware {
 
     // Motor Constants
     //Actual number needs to be found
-    public static final int ARM_PIXEL_SCORE_TWO = 7100;
     public static final int ARM_RESET = 0;
     public static final int ARM_PIXEL_DROP = -530;
     public static final int ARM_READY = -2271;
     public static final int ARM_UP = 435;
-    public static final int ARM_PIXEL_SCORE = 4815;
+    public static final int ARM_PIXEL_SCORE = 4615;
     public static final int ARM_PIXEL_SCORE_HIGH = 4415;
 
     //Create Odometry Motors
@@ -285,7 +284,6 @@ public class RobotHardware {
 
         //Initalize Servos
         rightClawServo.setPosition(RIGHT_CLAW_CLOSE);
-        leftClawServo.setPosition(LEFT_CLAW_CLOSE);
         armServo.setPosition(SHORT_ARM);
         hookServo.setPosition(HOOK_IN);
     }

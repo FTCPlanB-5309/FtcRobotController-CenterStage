@@ -123,6 +123,8 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
         }
         robot.wristServo.setPosition(robot.GRAB_WRIST);
         robot.armMotor.setTargetPosition(robot.ARM_RESET);
+        robot.armMotor.setPower(-1);
+        Thread.sleep(1000);
     }
 
 }

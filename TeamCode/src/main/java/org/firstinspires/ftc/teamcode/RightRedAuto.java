@@ -108,6 +108,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
                 robot.armMotor.setTargetPosition(robot.ARM_RESET);
                 drive.backward(10, .2);
                 robot.armServo.setPosition(robot.SHORT_ARM);
+                Thread.sleep(30000);
             }
         }
 

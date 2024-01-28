@@ -13,8 +13,9 @@ public class LeftBlueAuto extends LinearOpMode {
     GyroTurn gyroTurn = new GyroTurn(robot, telemetry, this);
     ReadSensor readSensor = new ReadSensor(robot, telemetry, this);
     Claws claws = new Claws(robot, telemetry, this);
+    FindProp findProp = new FindProp(robot, telemetry, this);
+
     PropLocation propLocation;
-    FindProp findProp;
     int back_distance;
 
     @Override
