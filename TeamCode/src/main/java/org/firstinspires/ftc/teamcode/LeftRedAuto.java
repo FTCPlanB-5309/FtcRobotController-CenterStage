@@ -14,63 +14,76 @@ public class LeftRedAuto extends LinearOpMode {
     Strafe strafe = new Strafe(robot, telemetry, this);
     GyroTurn gyroTurn = new GyroTurn(robot, telemetry, this);
     ReadSensor readSensor = new ReadSensor(robot, telemetry, this);
-    Claws claws = new Claws(robot,telemetry,this);
+    Claws claws = new Claws(robot, telemetry, this);
+    FindProp findProp = new FindProp(robot, telemetry, this);
     PropLocation propLocation;
-    FindProp findProp;
-
+    int back_distance;
+    int side_distance;
 
     @Override
     public void runOpMode() throws InterruptedException {
         robot.init(hardwareMap);
         robot.auto_init();
+        robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_LOCK);
+        robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_LOCK);
         waitForStart();
-        robot.armServo.setPosition(robot.LONG_ARM);
-        robot.wristServo.setPosition(robot.WRIST_DROP_PIXEL);
-        Thread.sleep(100);
-        robot.armMotor.setTargetPosition(ARM_PIXEL_DROP);
-        robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.armMotor.setPower(-1);
-        drive.forward(67, .25);
-        propLocation = findProp.FindPropForward();
-        Thread.sleep(1000);
+        robot.wristServo.setPosition(robot.UPWARDS_WRIST);
+        drive.backward(86, .25);
+        int leftDistance = (int) readSensor.distance(robot.leftDistanceSensor);
+        int rightDistance = (int) readSensor.distance(robot.rightDistanceSensor);
+        propLocation = findProp.FindPropBackward();
 
-        //left (same as RightRedRIGHT)
+        //left not completed
         switch (propLocation){
             case LEFT:
-                strafe.left(32,.2);
-                drive.backward(16,.2);
-                claws.LeftClawOpen();
-                drive.backward(10, .2);
-                robot.wristServo.setPosition(robot.GRAB_WRIST);
-                robot.armMotor.setTargetPosition(0);
+                strafe.right(33, .25);
+                robot.intakeMotor.setPower(-.25);
+                robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
+                drive.backward(36, .25);
+                robot.intakeMotor.setPower(0);
+                gyroTurn.goodEnough(-90);
+                Thread.sleep(300);
+                //2nd Pixel Scoring
+                drive.backward(228, .5);
                 break;
 
             case CENTER:
-                drive.forward(14,.2);
-                drive.backward(18, .4);
-                claws.LeftClawOpen();
-                Thread.sleep(500);
-                drive.backward(10, .2);
-                robot.armMotor.setTargetPosition(0);
+                drive.backward(12, .25);
+                robot.intakeMotor.setPower(-.25);
+                robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
+                Thread.sleep(250);
+                drive.backward(25,.25);
+                robot.intakeMotor.setPower(0);
+                gyroTurn.goodEnough(-90);
+                Thread.sleep(300);
+                //2nd pixel scoring
+                drive.backward(200, .5);
                 break;
 
             case RIGHT:
-                strafe.left(15, .2);
-                drive.backward(5,.2);
+
+                //first part from leftRedAuto
+                strafe.right(15, .25);
+                gyroTurn.goodEnough(89);
+                strafe.right(20, .25);
+                drive.forward(35,.25);
+                robot.intakeMotor.setPower(-.25);
+                robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
+                Thread.sleep(250);
+                drive.backward(20,.25);
+                robot.intakeMotor.setPower(0);
+                strafe.left(65,.25);
                 gyroTurn.goodEnough(-90);
-                Thread.sleep(500);
-                drive.forward(30,.2);
-                drive.backward(10,.2);
-                claws.LeftClawOpen();
-                Thread.sleep(750);
-                drive.backward(5,.2);
-                robot.wristServo.setPosition(robot.GRAB_WRIST);
-                robot.armMotor.setTargetPosition(0);
+                Thread.sleep(300);
+                //2nd Pixel Scoring
+                drive.backward(200, .75);
                 break;
+
+
+
         }
 
-        robot.armMotor.setTargetPosition(robot.ARM_RESET);
-        robot.armServo.setPosition(robot.SHORT_ARM);
+        robot.wristServo.setPosition(robot.GRAB_WRIST);
         Thread.sleep(30000);
 
 

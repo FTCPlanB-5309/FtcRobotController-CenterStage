@@ -43,6 +43,7 @@ public class RightBlueAutoTwoPixel extends LinearOpMode {
                 robot.intakeMotor.setPower(0);
                 strafe.right(65,.25);
                 gyroTurn.goodEnough(88);
+                Thread.sleep(300);
                 //2nd Pixel Scoring
                 drive.backward(190, .5);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
@@ -50,7 +51,7 @@ public class RightBlueAutoTwoPixel extends LinearOpMode {
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(1);
                 gyroTurn.goodEnough(90);
-                strafe.right(67, .35);
+                strafe.right(68, .35);
                 gyroTurn.goodEnough(90);
                 back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
                 drive.move_to_backboard_two_pixel(back_distance);
@@ -77,7 +78,8 @@ public class RightBlueAutoTwoPixel extends LinearOpMode {
                 robot.armMotor.setPower(1);
                 gyroTurn.goodEnough(88);
                 Thread.sleep(500);
-                strafe.right(51, .25);
+                strafe.right(56, .25);
+                Thread.sleep(500);
                 back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
                 drive.move_to_backboard_two_pixel(back_distance);
                 claws.RightClawOpen();
@@ -100,7 +102,7 @@ public class RightBlueAutoTwoPixel extends LinearOpMode {
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(1);
-                strafe.right(36, .25);
+                strafe.right(37, .25);
                 gyroTurn.goodEnough(90);
                 back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
                 drive.move_to_backboard_two_pixel(back_distance);

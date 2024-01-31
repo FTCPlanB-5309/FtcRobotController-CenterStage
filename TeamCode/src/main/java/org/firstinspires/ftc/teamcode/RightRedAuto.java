@@ -17,6 +17,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
         int back_distance;
         int side_distance;
 
+
+
         @Override
         public void runOpMode() throws InterruptedException {
             robot.init(hardwareMap);
@@ -24,7 +26,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
             robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_LOCK);
             waitForStart();
             robot.wristServo.setPosition(robot.UPWARDS_WRIST);
-            drive.forward(71, .25);
+            drive.forward(69, .25);
             Thread.sleep(500);
             propLocation = findProp.FindPropForward();
 
@@ -49,6 +51,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
                     drive.move_to_backboard_one_pixel(back_distance);
                     strafe.right(9, .25);
                     claws.RightClawOpen();
+                    Thread.sleep(500);
                     drive.forward(5, .25);
                     robot.wristServo.setPosition(robot.GRAB_WRIST);
                     robot.armMotor.setTargetPosition(0);
@@ -57,10 +60,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
                 case CENTER:
                     robot.intakeMotor.setPower(-.25);
-                    drive.forward(15, .25);
+                    drive.forward(13, .25);
                     robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
                     Thread.sleep(300);
-                    drive.backward(28, .25);
+                    drive.backward(26, .25);
                     robot.intakeMotor.setPower(0);
                     gyroTurn.goodEnough(90);
                     robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
@@ -71,7 +74,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
                     back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
                     drive.move_to_backboard_one_pixel(back_distance);
                     claws.RightClawOpen();
-                    Thread.sleep(200);
+                    Thread.sleep(500);
                     drive.forward(10, .25);
                     robot.wristServo.setPosition(robot.GRAB_WRIST);
                     robot.armMotor.setTargetPosition(0);
@@ -93,7 +96,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
                     robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     robot.armMotor.setPower(-1);
                     drive.backward(39, .25);
-                    strafe.right(6, .25);
+                    strafe.right(12, .25);
+                    Thread.sleep(250);
                     back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
                     drive.move_to_backboard_one_pixel(back_distance);
                     claws.RightClawOpen();

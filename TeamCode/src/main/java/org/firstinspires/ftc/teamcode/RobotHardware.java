@@ -73,7 +73,7 @@ public class RobotHardware {
     public static final int ARM_RESET = 0;
     public static final int ARM_PIXEL_DROP = -530;
     public static final int ARM_READY = -2271;
-    public static final int ARM_UP = 435;
+    public static final int ARM_UP = 235;
     public static final int ARM_PIXEL_SCORE = 4615;
     public static final int ARM_PIXEL_SCORE_HIGH = 4415;
 
@@ -116,7 +116,7 @@ public class RobotHardware {
     public static final double RESTING_WRIST = .619;
     public static final double GRAB_WRIST = .48;
     public static final double WRIST_DROP_PIXEL = .33;
-    public static final double WRIST_SCORE_PIXEL = .77;
+    public static final double WRIST_SCORE_PIXEL = .8;
     public static final double WRIST_SCORE_TWO_PIXEL = .83;
     //Stack
     public static final double STACK_KICK = .3;

@@ -103,6 +103,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
                 robot.intakeMotor.setPower(0);
                 strafe.left(65,.25);
                 gyroTurn.goodEnough(-90);
+                Thread.sleep(300);
                 //2nd Pixel Scoring
                 drive.backward(190, .75);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
@@ -114,7 +115,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
                 drive.move_to_backboard_two_pixel(back_distance);
                 claws.RightClawOpen();
                 claws.LeftClawOpen();
-                Thread.sleep(500);
+
                 drive.forward(4, .25);
                 break;
 
@@ -124,7 +125,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
         robot.wristServo.setPosition(robot.GRAB_WRIST);
         robot.armMotor.setTargetPosition(robot.ARM_RESET);
         robot.armMotor.setPower(-1);
-        Thread.sleep(1000);
+        Thread.sleep(30000);
     }
 
 }
