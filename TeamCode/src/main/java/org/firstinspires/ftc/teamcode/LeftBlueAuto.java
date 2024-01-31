@@ -41,8 +41,8 @@ public class LeftBlueAuto extends LinearOpMode {
                 robot.intakeMotor.setPower(0);
                 gyroTurn.goodEnough(-90);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
-                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);
                 drive.backward(58, .25);
                 strafe.left(7,.25);
@@ -67,8 +67,8 @@ public class LeftBlueAuto extends LinearOpMode {
                 robot.intakeMotor.setPower(0);
                 gyroTurn.goodEnough(-90);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
-                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);
                 drive.backward(73, .25);
                 strafe.left(10,.25);
@@ -92,8 +92,8 @@ public class LeftBlueAuto extends LinearOpMode {
                 robot.intakeMotor.setPower(-.25);
                 drive.backward(15, .25);
                 robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
-                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
+                robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);
                 drive.backward(72, .25);
                 robot.intakeMotor.setPower(0);

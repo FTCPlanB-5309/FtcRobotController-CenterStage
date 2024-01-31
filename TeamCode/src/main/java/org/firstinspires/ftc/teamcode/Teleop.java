@@ -75,19 +75,11 @@ public class Teleop extends OpMode {
         robot.init(hardwareMap);
         robot.armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        robot.rightOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        robot.middleOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        robot.leftOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        robot.rightOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        robot.middleOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        robot.leftOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.hookServo.setPosition(robot.HOOK_IN);
         robot.leftClawServo.setPosition(robot.LEFT_CLAW_OPEN);
         robot.rightClawServo.setPosition(robot.RIGHT_CLAW_OPEN);
         robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
         robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
-
-
 
     }
 

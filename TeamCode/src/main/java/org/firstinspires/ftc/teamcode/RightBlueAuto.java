@@ -77,8 +77,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
             robot.wristServo.setPosition(robot.GRAB_WRIST);
             Thread.sleep(30000);
-
-
     }
 }
 
