@@ -31,9 +31,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /**
@@ -88,7 +86,8 @@ public class Diagnostic extends OpMode {
         telemetry.addData("State of armTouchSensor", robot.armTouchSensor.getValue());
         telemetry.addData("Left Distance Sensor",robot.leftDistanceSensor.getDistance(DistanceUnit.CM));
         telemetry.addData("Right Distance Sensor",robot.rightDistanceSensor.getDistance(DistanceUnit.CM));
-        telemetry.addData("Rear Distance Sensor",robot.rearDistanceSensor.getDistance(DistanceUnit.CM));
+        telemetry.addData("Rear Right Distance Sensor",robot.rearRightDistanceSensor.getDistance(DistanceUnit.CM));
+        telemetry.addData("Rear Left Distance Sensor",robot.rearLeftDistanceSensor.getDistance(DistanceUnit.CM));
         telemetry.update();
 
 

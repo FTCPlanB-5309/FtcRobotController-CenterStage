@@ -1,18 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.teamcode.RobotHardware.ARM_PIXEL_DROP;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.vision.VisionPortal;
-import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
-import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
-
-import java.util.List;
 
 @Autonomous(name = "LeftRedAutoTwoPixel")
 
@@ -57,7 +47,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);
                 strafe.left(36, .25);
-                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
+                back_distance = (int) readSensor.distance(robot.rearRightDistanceSensor);
                 drive.move_to_backboard_two_pixel(back_distance);
                 claws.RightClawOpen();
                 claws.LeftClawOpen();
@@ -81,7 +71,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);
                 strafe.left(56, .25);
-                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
+                back_distance = (int) readSensor.distance(robot.rearRightDistanceSensor);
                 drive.move_to_backboard_two_pixel(back_distance);
                 claws.RightClawOpen();
                 claws.LeftClawOpen();
@@ -111,7 +101,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);
                 strafe.left(72, .35);
-                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
+                back_distance = (int) readSensor.distance(robot.rearRightDistanceSensor);
                 drive.move_to_backboard_two_pixel(back_distance);
                 claws.RightClawOpen();
                 claws.LeftClawOpen();

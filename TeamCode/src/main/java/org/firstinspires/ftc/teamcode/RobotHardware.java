@@ -97,7 +97,8 @@ public class RobotHardware {
     BNO055IMU imu;
     public Rev2mDistanceSensor rightDistanceSensor = null;
     public Rev2mDistanceSensor leftDistanceSensor = null;
-    public Rev2mDistanceSensor rearDistanceSensor = null;
+    public Rev2mDistanceSensor rearRightDistanceSensor = null;
+    public Rev2mDistanceSensor rearLeftDistanceSensor = null;
     public RevTouchSensor armTouchSensor = null;
 
     //Servo Constants
@@ -148,7 +149,7 @@ public class RobotHardware {
     public static final int RED_CENTER_DISTANCE = 55;
     public static final int RED_RIGHT_DISTANCE = 70;
     public static final int ONE_PIXEL_BOARD_DISTANCE = 23;
-    public static final int TWO_PIXEL_BOARD_DISTANCE = 21;
+    public static final int TWO_PIXEL_BOARD_DISTANCE = 19;
     //ROUGH ESTIMATES THEY NEED TO BE CHANGED
     public static final int LEFT_CASE_WALL_DISTANCE = 40;
     public static final int RIGHT_CASE_WALL_DISTANCE = 20;
@@ -226,7 +227,8 @@ public class RobotHardware {
 
         leftDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "leftDistanceSensor");
         rightDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "rightDistanceSensor");
-        rearDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "rearDistanceSensor");
+        rearRightDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "rearRightDistanceSensor");
+        rearLeftDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "rearLeftDistanceSensor");
         armTouchSensor = hwMap.get(RevTouchSensor.class,"armTouchSensor");
 
 

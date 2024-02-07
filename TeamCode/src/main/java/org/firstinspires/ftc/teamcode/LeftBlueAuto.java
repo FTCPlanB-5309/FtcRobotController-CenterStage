@@ -46,7 +46,7 @@ public class LeftBlueAuto extends LinearOpMode {
                 robot.armMotor.setPower(-1);
                 drive.backward(58, .25);
                 strafe.left(7,.25);
-                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
+                back_distance = (int) readSensor.distance(robot.rearRightDistanceSensor);
                 drive.move_to_backboard_one_pixel(back_distance);
                 claws.RightClawOpen();
                 Thread.sleep(500);
@@ -72,7 +72,7 @@ public class LeftBlueAuto extends LinearOpMode {
                 robot.armMotor.setPower(-1);
                 drive.backward(73, .25);
                 strafe.left(10,.25);
-                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
+                back_distance = (int) readSensor.distance(robot.rearRightDistanceSensor);
                 drive.move_to_backboard_one_pixel(back_distance);
                 claws.RightClawOpen();
                 Thread.sleep(500);
@@ -98,7 +98,7 @@ public class LeftBlueAuto extends LinearOpMode {
                 drive.backward(72, .25);
                 robot.intakeMotor.setPower(0);
                 strafe.left(23, .25);
-                back_distance = (int) readSensor.distance(robot.rearDistanceSensor);
+                back_distance = (int) readSensor.distance(robot.rearRightDistanceSensor);
                 drive.move_to_backboard_one_pixel(back_distance);
                 claws.RightClawOpen();
                 Thread.sleep(500);
