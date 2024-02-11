@@ -75,7 +75,7 @@ public class RightBlueAutoTwoPixel extends LinearOpMode {
                 robot.armMotor.setPower(1);
                 gyroTurn.goodEnough(88);
                 Thread.sleep(500);
-                strafe.right(56, .25);
+                strafe.left_backboard_align(56, .25,PropLocation.CENTER);
                 Thread.sleep(500);
                 back_distance = (int) readSensor.distance(robot.rearRightDistanceSensor);
                 drive.move_to_backboard_two_pixel(back_distance);
@@ -99,7 +99,7 @@ public class RightBlueAutoTwoPixel extends LinearOpMode {
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(1);
-                strafe.right(37, .25);
+                strafe.left_backboard_align(37, .25, PropLocation.RIGHT);
                 gyroTurn.goodEnough(90);
                 back_distance = (int) readSensor.distance(robot.rearRightDistanceSensor);
                 drive.move_to_backboard_two_pixel(back_distance);

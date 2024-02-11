@@ -46,7 +46,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);
-                strafe.left(36, .25);
+                strafe.right_backboard_align(36, .25,PropLocation.LEFT);
                 back_distance = (int) readSensor.distance(robot.rearRightDistanceSensor);
                 drive.move_to_backboard_two_pixel(back_distance);
                 claws.RightClawOpen();
@@ -70,7 +70,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);
-                strafe.left(56, .25);
+                strafe.right_backboard_align(56, .25,PropLocation.CENTER);
                 back_distance = (int) readSensor.distance(robot.rearRightDistanceSensor);
                 drive.move_to_backboard_two_pixel(back_distance);
                 claws.RightClawOpen();
@@ -100,7 +100,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);
-                strafe.left(72, .35);
+                strafe.right_backboard_align(72, .35, PropLocation.RIGHT);
                 back_distance = (int) readSensor.distance(robot.rearRightDistanceSensor);
                 drive.move_to_backboard_two_pixel(back_distance);
                 claws.RightClawOpen();
