@@ -77,10 +77,7 @@ public class RobotHardware {
     public static final int ARM_PIXEL_SCORE = 4615;
     public static final int ARM_PIXEL_SCORE_HIGH = 4415;
 
-    //Create Odometry Motors
-//    public DcMotor leftOdometry = null;
-//    public DcMotor middleOdometry = null;
-//    public DcMotor rightOdometry = null;
+    //Create  Motors
 
     //Create Servos
     public Servo wristServo = null;
@@ -119,6 +116,7 @@ public class RobotHardware {
     public static final double WRIST_DROP_PIXEL = .33;
     public static final double WRIST_SCORE_PIXEL = .8;
     public static final double WRIST_SCORE_TWO_PIXEL = .83;
+    public static final double WRIST_PRE_GRAB = .45;
     //Stack
     public static final double STACK_KICK = .3;
     public static final double STACK_RESET = .7;
@@ -134,7 +132,7 @@ public class RobotHardware {
     public static final double WRIST_SERVO_CHANGE_RATE = .004;
     public static final double ARM_SERVO_CHANGE_RATE = .003;
     public static final int CLICKS_PER_CENTIMETER = 18;
-    public static final double ODOMETRY_CLICKS_PER_CENTIMETER = 362.165;
+    public static final double _CLICKS_PER_CENTIMETER = 362.165;
     public static final int STRAFE_CLICKS_PER_CENTIMETER = 20;
 
     //Sensor Values
@@ -160,14 +158,14 @@ public class RobotHardware {
     public final double HIGH_TURN_POWER = 0.6;
     public final double LOW_TURN_POWER = 0.07;
 
-    //Odometry Values
+    // Values
     final static double L = 17.531;//distance between encoder 1 and 2 in cm
     final static double B = 35.062;//distance between the midpoint of encoder 1 and 2 and encoder 3
     final static double R = 3.6;//wheel radius in cm
     final static double N = 8192; //encoder ticks per revolution, REV encoder
     final static double cm_per_tick = 2.0 * Math.PI * R / N;
 
-    //Keep Track of Odometry Encoders Between Updates
+    //Keep Track of  Encoders Between Updates
     public int currentRightPosition = 0;
     public int currentMiddlePosition = 0;
     public int currentLeftPosition = 0;
@@ -208,11 +206,6 @@ public class RobotHardware {
         intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
         droneMotor = hwMap.get(DcMotor.class, "droneMotor");
 
-        // Odometry
-//        leftOdometry = hwMap.get(DcMotor.class, "leftOdometry");
-//        middleOdometry = hwMap.get(DcMotor.class, "frontLeftMotor");
-//        rightOdometry = hwMap.get(DcMotor.class, "frontRightMotor");
-
 
 
         wristServo = hwMap.get(Servo.class, "wristServo");
@@ -240,10 +233,7 @@ public class RobotHardware {
         backRightMotor.setDirection(DcMotor.Direction.FORWARD);
         frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
         armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        droneMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        //Odometry
-//        leftOdometry.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Using Encoders
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -258,12 +248,6 @@ public class RobotHardware {
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         intakeMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         droneMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        rightOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        rightOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        middleOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        middleOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        leftOdometry.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        leftOdometry.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
         armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -289,38 +273,4 @@ public class RobotHardware {
         armServo.setPosition(SHORT_ARM);
         hookServo.setPosition(HOOK_IN);
     }
-//    public void odometry(){
-//
-//        oldRightPosition = currentRightPosition;
-//        oldMiddlePosition = currentMiddlePosition;
-//        oldLeftPosition = currentLeftPosition;
-//
-//        currentRightPosition = -frontRightMotor.getCurrentPosition();
-//        currentMiddlePosition = frontLeftMotor.getCurrentPosition();
-//        currentLeftPosition = -leftOdometry.getCurrentPosition();
-//
-//        int dn2 = currentRightPosition - oldRightPosition;
-//        int dn3 = currentMiddlePosition - oldMiddlePosition;
-//        int dn1 = currentLeftPosition - oldLeftPosition;
-//
-//        //The robot has moved and turned a tiny bit between the two measurements
-//        double dtheta = cm_per_tick * (dn2-dn1) / L;
-//        double dx = cm_per_tick * (dn1+dn2) / 2.0;
-//        double dy = cm_per_tick * (dn3 - (dn2-dn1) * B / L);
-//
-//        //Small movement of the robot gets added to the filed coordinate system
-//        double theta = pos.h + (dtheta / 2.0);
-//        pos.x += dx * Math.cos(theta) - dy * Math.sin(theta);
-//        pos.y += dx * Math.sin(theta) + dy * Math.cos(theta);
-//        pos.h += dtheta;
-//
-//        //Limit theta to +/- PI or +/- 180 degrees
-//        pos.h = pos.h % (2.0 * Math.PI);
-//        if (pos.h > Math.PI){
-//            pos.h -= 2.0 * Math.PI;
-//        }
-//        if (pos.h < -Math.PI ){
-//            pos.h += 2.0 * Math.PI;
-//        }
-//    }
 }

@@ -304,7 +304,7 @@ public class Teleop extends OpMode {
 
                 case MOVE_SERVOS:
                     time_arm_move = System.currentTimeMillis() + 500;
-                    robot.wristServo.setPosition(robot.GRAB_WRIST);
+                    robot.wristServo.setPosition(robot.WRIST_PRE_GRAB);
                     robot.leftClawServo.setPosition(robot.LEFT_CLAW_OPEN);
                     robot.rightClawServo.setPosition(robot.RIGHT_CLAW_OPEN);
                     robot.armServo.setPosition(robot.SHORT_ARM);
@@ -344,6 +344,7 @@ public class Teleop extends OpMode {
             case ARM_OUT:
                 time_arm_move_out = System.currentTimeMillis() + 500;
                 robot.armServo.setPosition(robot.GRAB_ARM);
+                robot.wristServo.setPosition(robot.GRAB_WRIST);
                 loadpixelState = LoadPixelStates.CLOSE_CLAWS;
                 break;
 
