@@ -11,7 +11,6 @@ public class Strafe {
     LinearOpMode linearOpMode;
     DriveTrain driveTrain;
     ReadSensor readSensor;
-    PropLocation propLocation;
 
 
     public Strafe(RobotHardware robot, Telemetry telemetry, LinearOpMode linearOpMode){
@@ -141,10 +140,10 @@ public class Strafe {
         if (found_edge == true) {
 
             if (propLocation == PropLocation.LEFT)
-                newTarget = robot.backRightMotor.getCurrentPosition() + (robot.STRAFE_CLICKS_PER_CENTIMETER * 11);
+                newTarget = robot.backRightMotor.getCurrentPosition() + (robot.STRAFE_CLICKS_PER_CENTIMETER * 9);
 
             if (propLocation == PropLocation.CENTER)
-                newTarget = robot.backRightMotor.getCurrentPosition() + (robot.STRAFE_CLICKS_PER_CENTIMETER * 30);
+                newTarget = robot.backRightMotor.getCurrentPosition() + (robot.STRAFE_CLICKS_PER_CENTIMETER * 28);
 
             if (propLocation == PropLocation.RIGHT)
                 newTarget = robot.backRightMotor.getCurrentPosition() + (robot.STRAFE_CLICKS_PER_CENTIMETER * 41);

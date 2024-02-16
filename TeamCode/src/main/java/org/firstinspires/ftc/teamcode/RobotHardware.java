@@ -72,10 +72,9 @@ public class RobotHardware {
     //Actual number needs to be found
     public static final int ARM_RESET = 0;
     public static final int ARM_PIXEL_DROP = -530;
-    public static final int ARM_READY = -2271;
     public static final int ARM_UP = 235;
-    public static final int ARM_PIXEL_SCORE = 4615;
-    public static final int ARM_PIXEL_SCORE_HIGH = 4415;
+    public static final int ARM_PIXEL_SCORE = 4315;
+    public static final int ARM_PIXEL_SCORE_HIGH = 4115;
 
     //Create  Motors
 
@@ -113,7 +112,6 @@ public class RobotHardware {
     public static final double UPWARDS_WRIST = .75;
     public static final double RESTING_WRIST = .619;
     public static final double GRAB_WRIST = .48;
-    public static final double WRIST_DROP_PIXEL = .33;
     public static final double WRIST_SCORE_PIXEL = .8;
     public static final double WRIST_SCORE_TWO_PIXEL = .83;
     public static final double WRIST_PRE_GRAB = .45;
@@ -121,63 +119,29 @@ public class RobotHardware {
     public static final double STACK_KICK = .3;
     public static final double STACK_RESET = .7;
     //Hook
-    public static final double HOOK_IN = .77;
+    public static final double HOOK_IN = .6;
     public static final double HOOK_OUT = .4;
     //Arm
     public static final double SHORT_ARM = 1;
     public static final double GRAB_ARM = .62;
-    public static final double LONG_ARM = 0;
 
     //Rates
     public static final double WRIST_SERVO_CHANGE_RATE = .004;
     public static final double ARM_SERVO_CHANGE_RATE = .003;
     public static final int CLICKS_PER_CENTIMETER = 18;
-    public static final double _CLICKS_PER_CENTIMETER = 362.165;
     public static final int STRAFE_CLICKS_PER_CENTIMETER = 20;
 
     //Sensor Values
-    public double leftDistance = 8192;
-    public double rightDistance = 8192;
     public static final double PROP_THRESHOLD = 12;
     //DISTANCES NEED TO BE FOUND
-    public static final int BLUE_LEFT_DISTANCE = 1000;
-    public static final int BLUE_CENTER_DISTANCE = 1000;
-    public static final int BLUE_RIGHT_DISTANCE = 1000;
-    public static final int RED_LEFT_DISTANCE = 49;
-    public static final int RED_CENTER_DISTANCE = 55;
-    public static final int RED_RIGHT_DISTANCE = 70;
     public static final int ONE_PIXEL_BOARD_DISTANCE = 23;
     public static final int TWO_PIXEL_BOARD_DISTANCE = 19;
-    //ROUGH ESTIMATES THEY NEED TO BE CHANGED
-    public static final int LEFT_CASE_WALL_DISTANCE = 40;
-    public static final int RIGHT_CASE_WALL_DISTANCE = 20;
-    public static final int CENTER_CASE_WALL_DISTANCE = 30;
 
 
     //Turning Speeds
     public final double HIGH_TURN_POWER = 0.6;
     public final double LOW_TURN_POWER = 0.07;
 
-    // Values
-    final static double L = 17.531;//distance between encoder 1 and 2 in cm
-    final static double B = 35.062;//distance between the midpoint of encoder 1 and 2 and encoder 3
-    final static double R = 3.6;//wheel radius in cm
-    final static double N = 8192; //encoder ticks per revolution, REV encoder
-    final static double cm_per_tick = 2.0 * Math.PI * R / N;
-
-    //Keep Track of  Encoders Between Updates
-    public int currentRightPosition = 0;
-    public int currentMiddlePosition = 0;
-    public int currentLeftPosition = 0;
-
-    private int oldRightPosition = 0;
-    private int oldMiddlePosition = 0;
-    private int oldLeftPosition = 0;
-
-    //XyhVector is a tuple (x,y,h) where h is the heading of the robot
-    //We need to write the code for XyhVector
-//    public XyhVector START_POS = new XyhVector(91.44, 210.82, Math.toRadians(90));
-//    public XyhVector pos = new XyhVector(START_POS);
 
 
     /* local OpMode members. */
