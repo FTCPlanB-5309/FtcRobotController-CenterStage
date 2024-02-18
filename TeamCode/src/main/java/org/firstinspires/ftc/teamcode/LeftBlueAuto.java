@@ -25,17 +25,17 @@ public class LeftBlueAuto extends LinearOpMode {
         robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_LOCK);
         waitForStart();
         robot.wristServo.setPosition(robot.UPWARDS_WRIST);
-        drive.forward(69, .25);
+        drive.forward(74, .25);
         Thread.sleep(500);
         propLocation = findProp.FindPropForward();
 
         switch (propLocation) {
             case LEFT:
                 robot.intakeMotor.setPower(-.25);
-                strafe.left(24, .25);
+                strafe.left(22, .25);
                 robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
                 Thread.sleep(300);
-                drive.backward(16, .25);
+                drive.backward(20, .25);
                 Thread.sleep(500);
                 drive.backward(8, .25);
                 robot.intakeMotor.setPower(0);
@@ -61,7 +61,7 @@ public class LeftBlueAuto extends LinearOpMode {
                 drive.forward(10, .25);
                 robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
                 Thread.sleep(300);
-                drive.backward(14, .25);
+                drive.backward(18, .25);
                 Thread.sleep(300);
                 drive.backward(8, .25);
                 robot.intakeMotor.setPower(0);
@@ -84,7 +84,7 @@ public class LeftBlueAuto extends LinearOpMode {
 
             case RIGHT:
                 strafe.left(15, .25);
-                drive.backward(5, .25);
+                drive.backward(9, .25);
                 gyroTurn.goodEnough(-90);
                 Thread.sleep(1000);
                 robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
@@ -97,7 +97,7 @@ public class LeftBlueAuto extends LinearOpMode {
                 robot.armMotor.setPower(-1);
                 drive.backward(72, .25);
                 robot.intakeMotor.setPower(0);
-                strafe.left(23, .25);
+                strafe.left(21, .25);
                 back_distance = (int) readSensor.distance(robot.rearRightDistanceSensor);
                 drive.move_to_backboard_one_pixel(back_distance);
                 claws.RightClawOpen();
