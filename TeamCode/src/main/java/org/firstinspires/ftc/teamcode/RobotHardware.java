@@ -73,8 +73,8 @@ public class RobotHardware {
     public static final int ARM_RESET = 0;
     public static final int ARM_PIXEL_DROP = -530;
     public static final int ARM_UP = 235;
-    public static final int ARM_PIXEL_SCORE = 4415;
-    public static final int ARM_PIXEL_SCORE_HIGH = 4115;
+    public static final int ARM_PIXEL_SCORE = 4515;
+    public static final int ARM_PIXEL_SCORE_HIGH = 4215;
 
     //Create  Motors
 
@@ -135,7 +135,7 @@ public class RobotHardware {
     public static final double PROP_THRESHOLD = 12;
     //DISTANCES NEED TO BE FOUND
     public static final int ONE_PIXEL_BOARD_DISTANCE = 21;
-    public static final int TWO_PIXEL_BOARD_DISTANCE = 19;
+    public static final int TWO_PIXEL_BOARD_DISTANCE = 18;
 
 
     //Turning Speeds

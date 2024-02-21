@@ -26,14 +26,16 @@ public class RightBlueAutoTwoPixel extends LinearOpMode {
         robot.wristServo.setPosition(robot.UPWARDS_WRIST);
         drive.backward(88, .25);
         propLocation = findProp.FindPropBackward();
+        double WristValue = -1.76E-04*(robot.ARM_PIXEL_SCORE_HIGH) + 1.61;
 
 
         switch (propLocation) {
             case LEFT: //same as right leftredautotwopixel
+                //1st Pixel
                 strafe.left(15, .32);
                 gyroTurn.goodEnough(-89);
                 strafe.left(25, .32);
-                drive.forward(35,.32);
+                drive.forward(33,.32);
                 robot.intakeMotor.setPower(-.25);
                 robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
                 Thread.sleep(250);
@@ -43,7 +45,7 @@ public class RightBlueAutoTwoPixel extends LinearOpMode {
                 gyroTurn.goodEnough(88);
                 //2nd Pixel Scoring
                 drive.backward(190, .7);
-                robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
+                robot.wristServo.setPosition(WristValue);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(1);
@@ -69,7 +71,7 @@ public class RightBlueAutoTwoPixel extends LinearOpMode {
                 Thread.sleep(300);
                 //2nd pixel scoring
                 drive.backward(190, .5);
-                robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
+                robot.wristServo.setPosition(WristValue);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(1);
@@ -95,7 +97,7 @@ public class RightBlueAutoTwoPixel extends LinearOpMode {
                 Thread.sleep(300);
                 //2nd Pixel Scoring
                 drive.backward(218, .5);
-                robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
+                robot.wristServo.setPosition(WristValue);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(1);

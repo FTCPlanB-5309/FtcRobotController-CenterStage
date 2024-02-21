@@ -29,8 +29,9 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
         int leftDistance = (int) readSensor.distance(robot.leftDistanceSensor);
         int rightDistance = (int) readSensor.distance(robot.rightDistanceSensor);
         propLocation = findProp.FindPropBackward();
+        double WristValue = -1.76E-04*(robot.ARM_PIXEL_SCORE_HIGH) + 1.61;
 
-        //left not completed
+
         switch (propLocation){
             case LEFT:
                 strafe.right(33, .25);
@@ -42,7 +43,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
                 Thread.sleep(300);
                 //2nd Pixel Scoring
                 drive.backward(218, .5);
-                robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
+                robot.wristServo.setPosition(WristValue);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);
@@ -66,7 +67,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
                 Thread.sleep(300);
                 //2nd pixel scoring
                 drive.backward(190, .5);
-                robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
+                robot.wristServo.setPosition(WristValue);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);
@@ -96,7 +97,7 @@ public class LeftRedAutoTwoPixel extends LinearOpMode {
                 Thread.sleep(300);
                 //2nd Pixel Scoring
                 drive.backward(190, .75);
-                robot.wristServo.setPosition(robot.WRIST_SCORE_TWO_PIXEL);
+                robot.wristServo.setPosition(WristValue);
                 robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE_HIGH);
                 robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.armMotor.setPower(-1);

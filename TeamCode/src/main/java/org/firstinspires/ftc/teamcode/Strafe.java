@@ -140,13 +140,13 @@ public class Strafe {
         if (found_edge == true) {
 
             if (propLocation == PropLocation.LEFT)
-                newTarget = robot.backRightMotor.getCurrentPosition() + (robot.STRAFE_CLICKS_PER_CENTIMETER * 9);
+                newTarget = robot.backLeftMotor.getCurrentPosition() + (robot.STRAFE_CLICKS_PER_CENTIMETER * 13);
 
             if (propLocation == PropLocation.CENTER)
-                newTarget = robot.backRightMotor.getCurrentPosition() + (robot.STRAFE_CLICKS_PER_CENTIMETER * 28);
+                newTarget = robot.backLeftMotor.getCurrentPosition() + (robot.STRAFE_CLICKS_PER_CENTIMETER * 32);
 
             if (propLocation == PropLocation.RIGHT)
-                newTarget = robot.backRightMotor.getCurrentPosition() + (robot.STRAFE_CLICKS_PER_CENTIMETER * 41);
+                newTarget = robot.backLeftMotor.getCurrentPosition() + (robot.STRAFE_CLICKS_PER_CENTIMETER * 44);
 
             robot.frontRightMotor.setTargetPosition(newTarget);
             robot.backRightMotor.setTargetPosition(-newTarget);

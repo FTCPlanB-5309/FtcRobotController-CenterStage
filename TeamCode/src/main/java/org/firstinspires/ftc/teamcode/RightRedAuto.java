@@ -29,6 +29,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
             drive.forward(69, .25);
             Thread.sleep(500);
             propLocation = findProp.FindPropForward();
+            double WristValue = -1.76E-04*(robot.ARM_PIXEL_SCORE) + 1.61;
 
             switch(propLocation){
                 case LEFT: //same as leftblueright
@@ -41,7 +42,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
                     drive.forward(35, .25);
                     robot.intakeMotor.setPower(-.25);
                     drive.backward(15, .25);
-                    robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
+                    robot.wristServo.setPosition(WristValue);
                     robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
                     robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     robot.armMotor.setPower(-1);
@@ -66,7 +67,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
                     drive.backward(26, .25);
                     robot.intakeMotor.setPower(0);
                     gyroTurn.goodEnough(90);
-                    robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
+                    robot.wristServo.setPosition(WristValue);
                     robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
                     robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     robot.armMotor.setPower(-1);
@@ -91,7 +92,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
                     drive.backward(18, .25);
                     robot.intakeMotor.setPower(0);
                     gyroTurn.goodEnough(90);
-                    robot.wristServo.setPosition(robot.WRIST_SCORE_PIXEL);
+                    robot.wristServo.setPosition(WristValue);
                     robot.armMotor.setTargetPosition(robot.ARM_PIXEL_SCORE);
                     robot.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     robot.armMotor.setPower(-1);

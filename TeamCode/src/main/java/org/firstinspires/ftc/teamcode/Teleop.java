@@ -58,7 +58,7 @@ public class Teleop extends OpMode {
     long time_close_claws;
     long time_arm_move_out;
     long time_claws_grab_confident;
-    boolean grabbing = false;
+    boolean wrist_controlled = false;
     boolean slow_mode;
     Claws claws;
     PreloadStates preloadState = PreloadStates.NOT_RUNNING;
@@ -199,10 +199,19 @@ public class Teleop extends OpMode {
         if (gamepad2.dpad_up && WristPosition < 1) {
             WristPosition = WristPosition + robot.WRIST_SERVO_CHANGE_RATE;
             robot.wristServo.setPosition(WristPosition + robot.WRIST_SERVO_CHANGE_RATE);
+            wrist_controlled = true;
         }
         if (gamepad2.dpad_down && WristPosition > 0) {
             WristPosition = WristPosition - robot.WRIST_SERVO_CHANGE_RATE;
             robot.wristServo.setPosition(WristPosition - robot.WRIST_SERVO_CHANGE_RATE);
+            wrist_controlled = true;
+        }
+
+        if (robot.armMotor.getCurrentPosition() > 3014 &&
+                wrist_controlled == false &&
+                preloadState == PreloadStates.NOT_RUNNING){
+            WristPosition = -1.76E-04*(robot.armMotor.getCurrentPosition()) + 1.61;
+            robot.wristServo.setPosition(WristPosition);
         }
 
         //Pixel Lock Controls
@@ -241,6 +250,7 @@ public class Teleop extends OpMode {
         if (preloadState == PreloadStates.NOT_RUNNING &&
             loadpixelState == LoadPixelStates.NOT_RUNNING &&
             gamepad2.x) {
+                wrist_controlled = false;
                 preloadState = PreloadStates.MOVE_SERVOS;
         }
 
