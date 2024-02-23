@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -80,6 +81,7 @@ public class Teleop extends OpMode {
         robot.rightClawServo.setPosition(robot.RIGHT_CLAW_OPEN);
         robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
         robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
+        robot.lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.COLOR_WAVES_FOREST_PALETTE);
 
     }
 
@@ -219,11 +221,13 @@ public class Teleop extends OpMode {
         if(gamepad2.left_stick_y < -.5){
             robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_LOCK);
             robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_LOCK);
+            robot.lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.DARK_GREEN);
         }
         //Downwards on gamepad
         if (gamepad2.left_stick_y > .5){
             robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
             robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_UNLOCK);
+            robot.lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.YELLOW);
         }
 
         //Panic Button
@@ -234,13 +238,6 @@ public class Teleop extends OpMode {
             robot.armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
 
-        //Stack Servo Kick
-        if(gamepad1.left_trigger > 0.7)
-            robot.stackServo.setPosition(robot.STACK_KICK);
-
-        //Stack Servo Reset
-        if(gamepad1.left_bumper)
-            robot.stackServo.setPosition(robot.STACK_RESET);
 
 
         //AutoLoad Controls
@@ -319,6 +316,7 @@ public class Teleop extends OpMode {
                     robot.rightClawServo.setPosition(robot.RIGHT_CLAW_OPEN);
                     robot.armServo.setPosition(robot.SHORT_ARM);
                     preloadState = PreloadStates.MOVE_ARM;
+                    robot.lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.VIOLET);
                     break;
 
                 case MOVE_ARM:
@@ -356,6 +354,7 @@ public class Teleop extends OpMode {
                 robot.armServo.setPosition(robot.GRAB_ARM);
                 robot.wristServo.setPosition(robot.GRAB_WRIST);
                 loadpixelState = LoadPixelStates.CLOSE_CLAWS;
+                robot.lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.YELLOW);
                 break;
 
             case CLOSE_CLAWS:

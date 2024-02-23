@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -86,8 +87,9 @@ public class RobotHardware {
     public Servo hookServo = null;
     public Servo leftPixelLockServo = null;
     public Servo rightPixelLockServo = null;
-    public Servo stackServo = null;
 
+    //Create Lights
+    public RevBlinkinLedDriver lights;
 
     //Create Sensors
     BNO055IMU imu;
@@ -115,11 +117,8 @@ public class RobotHardware {
     public static final double WRIST_SCORE_PIXEL = .8;
     public static final double WRIST_SCORE_TWO_PIXEL = .83;
     public static final double WRIST_PRE_GRAB = .54;
-    //Stack
-    public static final double STACK_KICK = .3;
-    public static final double STACK_RESET = .7;
     //Hook
-    public static final double HOOK_IN = .6;
+    public static final double HOOK_IN = .65;
     public static final double HOOK_OUT = .4;
     //Arm
     public static final double SHORT_ARM = 1;
@@ -170,8 +169,6 @@ public class RobotHardware {
         intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
         droneMotor = hwMap.get(DcMotor.class, "droneMotor");
 
-
-
         wristServo = hwMap.get(Servo.class, "wristServo");
         leftClawServo = hwMap.get(Servo.class, "leftClawServo");
         rightClawServo = hwMap.get(Servo.class, "rightClawServo");
@@ -179,8 +176,8 @@ public class RobotHardware {
         hookServo = hwMap.get(Servo.class, "hookServo");
         rightPixelLockServo = hwMap.get(Servo.class, "rightPixelLockServo");
         leftPixelLockServo = hwMap.get(Servo.class, "leftPixelLockServo");
-        stackServo = hwMap.get(Servo.class,"stackServo");
 
+        lights = hwMap.get(RevBlinkinLedDriver.class, "lights");
 
         leftDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "leftDistanceSensor");
         rightDistanceSensor = hwMap.get(Rev2mDistanceSensor.class, "rightDistanceSensor");

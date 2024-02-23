@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import static org.firstinspires.ftc.teamcode.RobotHardware.ARM_PIXEL_DROP;
 
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -25,6 +26,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
             robot.auto_init();
             robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_LOCK);
             robot.leftPixelLockServo.setPosition(robot.LEFT_PIXEL_LOCK);
+            robot.lights.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
             waitForStart();
             robot.wristServo.setPosition(robot.UPWARDS_WRIST);
             drive.backward(90, .25);

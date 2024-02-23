@@ -110,7 +110,10 @@ public class Strafe {
         driveTrain.stop();
     }
 
-    //strafe left
+    //
+    //purpose:Find where to place second pixel
+    //How does it do it: takes two back distance sensors and when one sees the backboard and the other sees the back wall it knows it found the edge.
+    // It then updates its position and moves to the target position
     public void right_backboard_align (int distance, double speed, PropLocation propLocation) {
         double left_back;
         double right_back;
