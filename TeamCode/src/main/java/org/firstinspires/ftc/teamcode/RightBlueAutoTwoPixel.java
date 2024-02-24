@@ -37,11 +37,11 @@ public class RightBlueAutoTwoPixel extends LinearOpMode {
                 strafe.left(15, .32);
                 gyroTurn.goodEnough(-89);
                 strafe.left(25, .32);
-                drive.forward(33,.32);
+                drive.forward(31,.32);
                 robot.intakeMotor.setPower(-.25);
                 robot.rightPixelLockServo.setPosition(robot.RIGHT_PIXEL_UNLOCK);
                 Thread.sleep(250);
-                drive.backward(20,.32);
+                drive.backward(22,.32);
                 robot.intakeMotor.setPower(0);
                 strafe.right(65,.32);
                 gyroTurn.goodEnough(88);
